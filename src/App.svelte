@@ -4,7 +4,7 @@
 </script>
 
 <main>
-    <h1>SafeEntry Checker</h1>
+    <h1>SafeEntry Please</h1>
 	<div class="container-outer">
         <div class="container-inner">
             <Game></Game>
