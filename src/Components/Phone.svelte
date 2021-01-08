@@ -16,7 +16,8 @@
 	}
 
 	export let model = PhoneModelTypes.MODEL_IPHONE;
-	export let screen = PhoneScreenTypes.SCREEN_SAFE_ENTRY;
+	// export let screen = PhoneScreenTypes.SCREEN_SAFE_ENTRY;
+	let screen = '__'
 </script>
 
 <main>

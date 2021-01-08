@@ -3,7 +3,8 @@
 		'#BBBBBB'
 	]
 
-	export let status = TokenStatusTypes.TOKEN_OK;
+	// export let status = TokenStatusTypes.TOKEN_OK;
+	let status = '__'
 	export let color = 0;
 </script>
 
