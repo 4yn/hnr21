@@ -144,11 +144,14 @@
 </script>
 
 <main>
-	<canvas
-	bind:this={canvas}
-	width={1000}
-	height={1000}
-	></canvas>
+	<div style="position:relative;">
+		<canvas
+		bind:this={canvas}
+		width={200}
+		height={200}
+		style="position:absolute"
+		></canvas>
+	</div>
 </main>
 
 <style>
