@@ -182,7 +182,7 @@
         text-align: center;
         z-index: 10;
 
-        font-size: 1em;
+        font-size: 1.5em;
         font-weight: 10;
     }
 </style>

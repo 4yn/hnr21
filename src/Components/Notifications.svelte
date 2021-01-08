@@ -3,7 +3,7 @@
         [
             "Welcome to the job, part-timer.",
             "We've hired you to ensure that no one who enters the mall has caught the Virus.",
-            "Check each person's temperature, if it's above 37.5 degrees they're not allowed in.",
+            "Check each person's temperature. If it's above 37.5 degrees, they should be denied entry.",
             "Press A to allow entry and D to deny entry."
         ], [
             "WHO announcement: Wear those masks and stop the plague!"
