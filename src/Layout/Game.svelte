@@ -3,7 +3,6 @@
 
     import Minimap from '../Components/Minimap.svelte'
     import Booth from '../Components/Booth.svelte'
-
     import GameEngine from '../Engine/GameEngine.js'
 
     let gameEngineInstance = new GameEngine();
@@ -35,7 +34,7 @@
 
 <main>
     <Minimap class="minimap"/>
-    <Booth class="booth" gameDay={gameDay}/>
+    <Booth class="booth" gameDay={gameDay} started={started}/>
     {#if !started}
         <div class="overlay"/>
         <button on:click={startGame} class="startButton">

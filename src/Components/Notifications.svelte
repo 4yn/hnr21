@@ -42,7 +42,9 @@
         ]
     ];
 
-    export let day = 0;
+    export let gameDay = 0;
+    export let started = false;
+
     let notificationMessage;
     let notificationActive = false;
 
@@ -50,7 +52,7 @@
         setTimeout(_ => resolve(), millis)
     });
 
-    let displayMessageForDay = async day => {
+    let displayMessageForDay = async (day) => {
         for (var i = 0; i < MESSAGES[day].length; i++) {
             notificationMessage = MESSAGES[day][i];
             notificationActive = true;
@@ -61,8 +63,9 @@
     };
 
     $: {
-        console.log(day);
-        displayMessageForDay(day);
+        if (started) {
+            displayMessageForDay(gameDay);
+        }
     }
 </script>
 

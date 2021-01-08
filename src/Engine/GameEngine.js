@@ -3,7 +3,7 @@ import Generator from './Generator.js'
 import Rules from './Generator.js'
 
 export default class GameEngine {
-    static PROGRESS_NEEDED_PER_DAY = 100;
+    static PROGRESS_NEEDED_PER_DAY = 5;
 
     constructor(seed = 42) {
         this.rng = new MersenneTwister(seed);
@@ -28,7 +28,6 @@ export default class GameEngine {
             return;
         }
 
-        this.giveScore();
         if (
             this.queueSize == 0 ||
             this.rng.rnd() < this.difficulty
@@ -66,7 +65,7 @@ export default class GameEngine {
         if (this.progress >= GameEngine.PROGRESS_NEEDED_PER_DAY && this.day < 11) {
             this.progress = 0;
             this.day++;
-            this.paused = true;
+            this.paused = true; // Pause game until player decides
         }
         if (this.progress > GameEngine.PROGRESS_NEEDED_PER_DAY) {
             this.difficulty += 0.002;

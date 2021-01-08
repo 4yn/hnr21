@@ -7,6 +7,7 @@
 	import Notifications from './Notifications.svelte'
 
 	export let gameDay;
+	export let started;
 </script>
 
 <main>
@@ -16,7 +17,7 @@
 	<TemperatureCamera/>
 	<Phone/>
 	<Person/>
-	<Notifications day={gameDay}/>
+	<Notifications gameDay={gameDay} started={started}/>
 </main>
 
 <style>
