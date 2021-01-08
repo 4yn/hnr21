@@ -3,7 +3,9 @@
 
 	const partNames = ['body', 'face', 'eyes', 'nose', 'mouth', 'hair']
 
-	export let seed = 22164, selector = {};
+	export let seed = 14;
+	export let selector = {};
+	export let scale = 2;
 
 	function hash(seed, fallback) {
 		if (seed === null) return fallback
@@ -17,11 +19,11 @@
 	let parts = {}
 
 	$: {
-		let gender = (hash(seed, 10) || selector['gender']) % 2;
+		let gender = (hash(seed, null) || selector['gender']) % 2;
 		let PersonParts = gender ? PersonPartsM : PersonPartsF;
 		for (let partIdx in partNames) {
 			let partName = partNames[partIdx]
-			parts[partName] = PersonParts[partName][hash(seed, selector[partName] || 0) % PersonParts[partName].length]
+			parts[partName] = PersonParts[partName][hash(seed + partIdx + 1, selector[partName] || 0) % PersonParts[partName].length]
 		}
 	}
 
@@ -29,7 +31,7 @@
 
 <main>
 	Person component
-	<div class="person-container">
+	<div class="person-container" style="transform: scale({scale})">
 		{#each partNames as partName (partName)}
 			<img src={parts[partName]} class="person-part person-{partName}" alt={partName}/>
 		{/each}
@@ -38,7 +40,6 @@
 
 <style>
 	.person-container {
-		transform: scale(2);
 		transform-origin: 0 0;
 		position: relative;
 	}
