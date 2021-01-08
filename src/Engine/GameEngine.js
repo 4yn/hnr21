@@ -52,6 +52,9 @@ export default class GameEngine {
     popQueue() {
         this.queueSize--;
         this.person = generatePerson(this.rng.int());
+        if (this.queueSize === 0) {
+            this.pushQueue();
+        }
     }
 
     giveScore() {
