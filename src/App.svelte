@@ -4,20 +4,23 @@
 </script>
 
 <main>
-	<h1>Safeentry Please</h1>
 	<div class="container-outer">
-		<div class="container-inner">
-			<Game></Game>
-		</div>
+        <div class="container-inner">
+            <Game></Game>
+        </div>
 	</div>
 </main>
 
 <style>
 	main {
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
 		text-align: center;
 		padding: 1em;
 		max-width: 240px;
-		margin: 0 auto;
 
 		-webkit-touch-callout: none; /* iOS Safari */
 		-webkit-user-select: none; /* Safari */
@@ -28,30 +31,23 @@
 	}
 
 	.container-outer {
-		position: relative;
+	    position: relative;
 		outline: 0.25rem solid grey;
+		width: min(100vw - 48px, (100vh - 48px) * 8 / 5);
 	}
 
 	.container-outer:before {
 		display: block;
 		content: "";
-		width: 100%;
-		padding-top: 56.25%;
+		padding-top: min((100vw - 48px) * 5 / 8, 100vh - 48px);
 	}
 
 	.container-inner {
 		position: absolute;
 		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+        right: 0;
+	    bottom: 0;
+	    left: 0;
 	}
 
 	@media (min-width: 640px) {
