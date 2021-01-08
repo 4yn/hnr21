@@ -14,6 +14,7 @@ for gender in ['m', 'f']:
         ('eyes', glob(f'eye/*{gender}.png')),
         ('nose', glob(f'nose/*{gender}.png')),
         ('mouth', glob(f'mouth/*{gender}.png')),
+        ('mask', glob(f'mask/*{gender}.png')),
         ('hair', glob(f'hair/*{gender}.png')),
     ]
 

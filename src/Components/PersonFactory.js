@@ -1,7 +1,7 @@
 import {PersonPartsM, PersonPartsF} from './PersonParts.js'
 
-const partNames = ['body', 'face', 'eyes', 'nose', 'mouth', 'hair']
-const partHeat = [10, 40, 60, 20, 20, 10]
+const partNames = ['body', 'face', 'eyes', 'nose', 'mouth', 'mask', 'hair']
+const partHeat = [10, 40, 60, 20, -20, 20, 10]
 
 function hash(seed, fallback) {
     if (seed === null) return fallback
@@ -72,7 +72,15 @@ export default function personFactory(seed=null, selector={}) {
                 return new Promise((resolve) => {
                     img.onload = function() {
                         ctx.imageSmoothingEnabled = false;
-                        ctx.drawImage(img, 0, partName === 'body' ? 32 : 0);
+                        if (partName === 'body') {
+                            ctx.drawImage(img, 0, 32);
+                        } else if (partName === 'mask') {
+                            ctx.globalCompositeOperation = 'source-atop';
+                            ctx.drawImage(img, 0, 0, 64, 64, 16, 24, 32, 32);
+                            ctx.globalCompositeOperation = 'source-over';
+                        } else {
+                            ctx.drawImage(img, 0, 0);
+                        }
                         resolve()
                     }
                 })
