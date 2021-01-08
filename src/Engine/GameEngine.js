@@ -1,23 +1,12 @@
 import MersenneTwister from 'mersennetwister'
-
-function generatePerson(seed) {
-    return {
-        allowed: true
-    };
-    /*
-    return {
-        allowed: false,
-        reason: 'Faulty TraceTogether token'
-    }
-    */
-}
+import Rules from './Rules.js'
 
 export default class GameEngine {
     constructor(seed = 42) {
         this.rng = new MersenneTwister(seed)
 
-        this.progress = 0.0
-        this.difficulty = 0.05
+        this.progress = 0
+        this.difficulty = 0.025
 
         this.tick = 0
         this.score = 0
@@ -28,7 +17,7 @@ export default class GameEngine {
 
     doTick() {
         if (
-            this.queueSize == 0 || 
+            this.queueSize == 0 ||
             this.rng.rnd() < this.difficulty
         ) {
             this.pushQueue();
@@ -70,5 +59,17 @@ export default class GameEngine {
         this.pushQueue();
         this.pushQueue();
         this.pushQueue();
+    }
+
+    generatePerson() {
+        return {
+            allowed: true
+        };
+        /*
+        return {
+            allowed: false,
+            reason: 'Faulty TraceTogether token'
+        }
+        */
     }
 }
