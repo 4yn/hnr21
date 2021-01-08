@@ -4,6 +4,7 @@
 </script>
 
 <main>
+    <h1>SafeEntry Checker</h1>
 	<div class="container-outer">
         <div class="container-inner">
             <Game></Game>
@@ -33,14 +34,17 @@
 	.container-outer {
 	    position: relative;
 		outline: 0.25rem solid grey;
-		width: min(100vw - 48px, (100vh - 48px) * 8 / 5);
+		width: min(100vw - 48px, (100vh - 128px - 48px) * 8 / 5);
+		height: min((100vw - 48px) * 5 / 8, 100vh - 8em - 48px);
 	}
 
+    /*
 	.container-outer:before {
 		display: block;
 		content: "";
-		padding-top: min((100vw - 48px) * 5 / 8, 100vh - 48px);
+		padding-top: min((100vw - 48px) * 5 / 8, calc(100vh - 8em - 48px));
 	}
+    */
 
 	.container-inner {
 		position: absolute;
@@ -55,4 +59,13 @@
 			max-width: none;
 		}
 	}
+
+    h1 {
+        height: 2em;
+        color: #ff3e00;
+        text-transform: uppercase;
+        font-size: 4em;
+        font-weight: 100;
+        margin: 0;
+    }
 </style>
