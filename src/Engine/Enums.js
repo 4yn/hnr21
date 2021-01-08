@@ -19,6 +19,12 @@ export const HandTypes = {
     PHONE_OTHER: 'SCREEN_OTHER',
 	TOKEN_OK: 'TOKEN_OK',
 	TOKEN_FAKE: 'TOKEN_FAKE',
-    TOKEN_DAMAGED: 'TOKEN_DAMAGED',
-    TOKEN_TAMPERED: 'TOKEN_TAMPERED'
+    TOKEN_BAD: 'TOKEN_BAD'
+}
+
+// Maps between trait name and the corresponding enum.
+export const Traits = {
+    'temperature': TemperatureTypes,
+    'mask': MaskTypes,
+    'hand': HandTypes
 }

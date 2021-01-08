@@ -1,6 +1,10 @@
 import * as GameEnums from './Enums.js';
 
-export default class Rules {
+export default class Generator {
+    constructor(rng) {
+        this.rng = rng
+    }
+
     // Array containing rates of each legal trait at each day
     static LEGALS_TABLE = [
         {
@@ -107,7 +111,8 @@ export default class Rules {
         }
     ];
 
-    static ILLEGAL_CHANCE = 0.4; // Fixed rate
+    // Chance to generate an illegal person.
+    static ILLEGAL_CHANCE = 0.4;
 
     // Array containing chance of each illegal type
     static ILLEGAL_TYPE_CHANCES = [
@@ -124,4 +129,40 @@ export default class Rules {
         [0.3, 0.05, 0.65],
         [0.5, 0.05, 0.45]
     ];
+
+    // Returns a JSON object containing fields 'allowed', 'temperature', 'mask' and 'hand'.
+    generatePerson(day) {
+        // Generate legal or illegal
+        let illegal = (this.rng.rnd() < Generator.ILLEGAL_CHANCE);
+
+        let illegalName = null;
+        if (illegal) {
+            illegalName = Object.keys(GameEnums.Traits)[this.generateOutcome(Generator.ILLEGAL_TYPE_CHANCES[day])];
+        }
+        
+        let person = { allowed: !illegal };
+        Object.keys(GameEnums.Traits).forEach(fieldName => {
+            if (fieldName == illegalName) {
+                let index = this.generateOutcome(Generator.ILLEGALS_TABLE[day][fieldName]);
+                person[fieldName] = Object.values(GameEnums.Traits[fieldName])[index];
+            } else {
+                let index = this.generateOutcome(Generator.LEGALS_TABLE[day][fieldName]);
+                person[fieldName] = Object.values(GameEnums.Traits[fieldName])[index];
+            }
+        });
+
+        return person;
+    }
+
+    generateOutcome(rates) {
+        let randValue = this.rng.rnd();
+        for (var i = 0; i < rates.length; i++) {
+            randValue -= rates[i];
+            if (randValue <= 0) {
+                return i;
+            }
+        }
+
+        return rates.length - 1; // rates don't sum up to (at least) 1, return the last index
+    }
 }
