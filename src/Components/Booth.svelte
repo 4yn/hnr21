@@ -1,8 +1,6 @@
 <script>
-	import Token from './Token.svelte'
 	import TemperatureScanner from './TemperatureScanner.svelte'
 	import TemperatureCamera from './TemperatureCamera.svelte'
-	import Phone from './Phone.svelte'
 	import Person from './Person.svelte'
 	import Notifications from './Notifications.svelte'
 
@@ -22,11 +20,10 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		Booth component
-		<Token/>
 		<div class="person-container">
-			<Phone/>
-			<Person scale={2.5}/>
+			{#if traits}
+				<Person scale={2.5} traits={traits}/>
+			{/if}
 		</div>
 	</div>
 	<div class="wrapper">
@@ -36,8 +33,14 @@
 	</div>
 	<div class="wrapper">
 		<div class="scanner-container">
-			<TemperatureScanner/>
-			<TemperatureCamera/>
+			{#if !!rules && !!traits}
+				{#if !rules.IR_CAMERA}
+					<TemperatureScanner seed={traits.seed} hot={rules.HIGH_TEMP} temp={traits.temperature}/>
+				{:else}
+					<TemperatureCamera seed={traits.seed} hot={rules.HIGH_TEMP} temp={traits.temperature}/>
+				{/if}
+			{/if}
+			
 		</div>
 	</div>
 	<div class="wrapper">
@@ -58,7 +61,7 @@
 
 	.person-container {
 		position: absolute;
-		top: 0px;
+		top: 45px;
 		left: 190px;
 	}
 
