@@ -1,13 +1,40 @@
 <script>
-	export let param;
 	import { onMount } from 'svelte';
+	
+	export let queueSize;
+	var prevQ = null;
+
 	//coordinates of the people
 	var arr = [
-		[1, 1],
-		[2, 2],
-		[3, 3]
+		[90, 80],
+		[110, 80],
+		[130, 80],
+		[150, 80],
+		[170, 80],
+		[190, 80],
+		[210, 80],
+		[230, 80],
+		[250, 80],
+		[270, 80],
+		[270, 40],
+		[270, 0],
+		[250, 0],
+		[230, 0],
+		[210, 0],
+		[190, 0],
+		[170, 0],
+		[150, 0],
+		[130, 0],
+		[110, 0],
+		[90, 0],
+		[70, 0],
+		[50, 0],
+		[30, 0],
+		[10, 0],
 	];
+
 	let src = 'tempminigame3.png';
+	let src2 = 'people2.png';
 	let canvas;
 
 	onMount(() => {
@@ -20,23 +47,49 @@
 			context.mozImageSmoothingEnabled = false;
 			context.imageSmoothingEnabled = false;
 			context.drawImage(base_image, 0, 0, context.canvas.width, context.canvas.height);
-			//draw_triangle(temperature);
 		};
 
 		base_image.src = src;
 
-		function draw_triangle(temperature) {
-			let offsetx = (temperature - 37.5)*30
-
-			context.beginPath();
-			context.moveTo(offsetx + 150, 175);
-			context.lineTo(offsetx + 160, 185);
-			context.lineTo(offsetx + 140, 185);
-			context.fill();
-
-		}
-
 	});
+
+	function animate() {
+		const context = canvas.getContext('2d');
+
+		context.clearRect(0, 0, canvas.width, canvas.height);  // clear canvas
+
+		var base_image = new Image();
+		base_image.onload = function () {
+			context.webkitImageSmoothingEnabled = false;
+			context.mozImageSmoothingEnabled = false;
+			context.imageSmoothingEnabled = false;
+			context.drawImage(base_image, 0, 0, context.canvas.width, context.canvas.height);
+		};
+
+		base_image.src = src;
+
+		for (let i = 0; i < Math.min(25, queueSize); i++){
+			let person2 = new Image();
+			person2.onload = function () {
+				context.webkitImageSmoothingEnabled = false;
+				context.mozImageSmoothingEnabled = false;
+				context.imageSmoothingEnabled = false;
+				context.drawImage(person2, arr[i][0], arr[i][1], 16, 46);
+			};
+			person2.src = src2;
+		}
+	}
+
+    $: {
+
+
+		if (prevQ===null || prevQ === queueSize || queueSize < 0){
+			prevQ = queueSize;
+		} else {
+			console.log(queueSize);
+			animate();
+		}
+    }
 
 </script>
 

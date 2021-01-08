@@ -79,7 +79,7 @@
 </script>
 
 <main>
-    <Minimap class="minimap"/>
+    <Minimap class="minimap" queueSize={queueSize}/>
     <Booth class="booth" gameDay={gameDay} gameRunning={gameRunning} traits={traits} rules={rules}/>
     {#if !gameRunning}
         <div class="overlay"/>
