@@ -7,13 +7,9 @@
 	import Notifications from './Notifications.svelte'
 
 	export let gameDay;
-<<<<<<< HEAD
 	export let gameRunning;
-=======
-	export let gameStarted;
 	export let traits;
 	export let rules;
->>>>>>> origin
 
 	let src = 'background.png';
 </script>
