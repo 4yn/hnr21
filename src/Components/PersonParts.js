@@ -14,6 +14,7 @@ import Mouth13M from '../../res/mouth/mouth_13_m.png'
 import MaskClothM from '../../res/mask/mask_cloth_m.png'
 import MaskCloth3M from '../../res/mask/mask_cloth3_m.png'
 import MaskSurgicalM from '../../res/mask/mask_surgical_m.png'
+import AaemptyMaskM from '../../res/mask/aaempty_mask_m.png'
 import MaskBagM from '../../res/mask/mask_bag_m.png'
 import MaskN95M from '../../res/mask/mask_n95_m.png'
 import MaskLettuceM from '../../res/mask/mask_lettuce_m.png'
@@ -27,7 +28,7 @@ export const PersonPartsM = {
 	eyes: [Eye3M, Eye13M, Eye2M],
 	nose: [Nose3M, Nose2M, Nose13M],
 	mouth: [Mouth2M, Mouth3M, Mouth13M],
-	mask: [MaskClothM, MaskCloth3M, MaskSurgicalM, MaskBagM, MaskN95M, MaskLettuceM, MaskCloth2M],
+	mask: [AaemptyMaskM, MaskClothM, MaskCloth3M, MaskSurgicalM, MaskN95M, MaskCloth2M, MaskBagM, MaskLettuceM],
 	hair: [Hair3M, Hair13M, Hair2M],
 }
 import Body1F from '../../res/body/body_1_f.png'
@@ -49,6 +50,7 @@ import MaskSurgicalF from '../../res/mask/mask_surgical_f.png'
 import MaskLettuceF from '../../res/mask/mask_lettuce_f.png'
 import MaskCloth3F from '../../res/mask/mask_cloth3_f.png'
 import MaskCloth2F from '../../res/mask/mask_cloth2_f.png'
+import AaemptyMaskF from '../../res/mask/aaempty_mask_f.png'
 import MaskClothF from '../../res/mask/mask_cloth_f.png'
 import Hair6F from '../../res/hair/hair_6_f.png'
 import Hair27F from '../../res/hair/hair_27_f.png'
@@ -59,6 +61,6 @@ export const PersonPartsF = {
 	eyes: [Eye1F, Eye6F, Eye27F],
 	nose: [Nose27F, Nose6F, Nose1F],
 	mouth: [Mouth1F, Mouth27F, Mouth6F],
-	mask: [MaskBagF, MaskN95F, MaskSurgicalF, MaskLettuceF, MaskCloth3F, MaskCloth2F, MaskClothF],
+	mask: [AaemptyMaskF, MaskN95F, MaskSurgicalF, MaskCloth3F, MaskCloth2F, MaskClothF, MaskBagF, MaskLettuceF],
 	hair: [Hair6F, Hair27F, Hair1F],
 }

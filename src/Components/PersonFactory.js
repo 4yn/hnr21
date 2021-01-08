@@ -48,8 +48,8 @@ export default function personFactory(seed=null, selector={}) {
     partIdxs['heat'] = useHeat
     for (let partIdx in partNames) {
         let partName = partNames[partIdx]
-        partIdxs[partName] = hash(seed + partIdx + 1, selector[partName] || 0) % PersonParts[partName].length;
-        parts[partName] = PersonParts[partName][hash(seed + partIdx + 1, selector[partName] || 0) % PersonParts[partName].length]
+        partIdxs[partName] = ((partName in selector) ? selector[partName] : hash(seed + partIdx + 1, 0)) % PersonParts[partName].length;
+        parts[partName] = PersonParts[partName][partIdxs[partName]]
     }
     let key = JSON.stringify(partIdxs);
 

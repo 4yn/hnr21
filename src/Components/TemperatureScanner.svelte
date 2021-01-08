@@ -1,8 +1,12 @@
 <script>
+    import { TemperatureTypes } from '../Engine/Enums.js'
 		
-	export let temperature = 37.5;
-	export let high = false;
-	import { onMount } from 'svelte';
+	export let seed = 0;
+    export let temp = TemperatureTypes.TEMP_OK;
+    export let hot = false;
+    import { onMount } from 'svelte';
+    let temperature = 37.5;
+    let oldSeed = null;
 
 	//must edit this source later
 	let src = 'head_thermometer_no_reading_updated.png';
@@ -89,11 +93,10 @@
 	};
 
 
-	let canvas;
-
-	onMount(() => {
-
-		const context = canvas.getContext('2d');
+    let canvas;
+    
+    function updateImage() {
+        const context = canvas.getContext('2d');
 
 		var base_image = new Image();
         base_image.onload = function () {
@@ -101,7 +104,7 @@
 			context.mozImageSmoothingEnabled = false;
 			context.imageSmoothingEnabled = false;
 			context.drawImage(base_image, 0, 0, 200, 200);
-			draw(temperature.toString(), 4);
+			draw(temperature.toString().slice(0, 4), 4);
 		};
 
 		base_image.src = src;
@@ -138,8 +141,28 @@
 			}
 
 		}
-		
-	});
+    }
+
+	onMount(() => {
+        updateImage();
+    });
+    
+    $: {
+        if (seed !== oldSeed && oldSeed !== null) {
+            if (temp === TemperatureTypes.TEMP_OK) {
+                temperature = 37.4 - ((seed * seed * seed) % 15) / 10.0
+            } else {
+                temperature = 37.5 + ((seed * seed * seed) % 10) / 10.0
+            }
+
+            if (hot) {
+                temperature = temperature + 0.4;
+            }
+
+            updateImage();
+        }
+        oldSeed = seed
+    }
 
 </script>
 

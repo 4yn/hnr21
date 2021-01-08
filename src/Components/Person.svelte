@@ -1,8 +1,10 @@
 <script>
+	import { MaskTypes } from '../Engine/Enums.js'
 	import personFactory from './PersonFactory.js'
 	import Hand from './Hand.svelte'
 
-	export let seed = 1425;
+	export let traits;
+
 	// Heat 1 or more is fever, heat 0.01 is ok, heat null is normal portrait
 	export let selector = {};
 	// export let selector = {heat: 1};
@@ -11,7 +13,19 @@
 	let personSrc = null
 
 	$: {
-		personFactory(seed, selector).then((res) => {
+		let maskSelector = {}
+		switch (traits.mask) {
+			case MaskTypes.MASK_NONE:
+				maskSelector['mask'] = 0
+				break
+			case MaskTypes.MASK_OK:
+				maskSelector['mask'] = 1 + traits.seed % 5
+				break
+			case MaskTypes.MASK_FUNNY:
+				maskSelector['mask'] = 6 + traits.seed % 2
+				break
+		}
+		personFactory(traits.seed, {...selector, ...maskSelector}).then((res) => {
 			personSrc = res
 		})
 	}
@@ -22,7 +36,7 @@
 	<div class="person-container">
 		<img src={personSrc} alt="person" style="transform: scale({scale})">
 	</div>
-	<Hand/>
+	<Hand seed={traits.seed} holding={traits.hand}/>
 </main>
 
 <style>

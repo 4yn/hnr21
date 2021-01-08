@@ -21,7 +21,9 @@
 	</div>
 	<div class="wrapper">
 		<div class="person-container">
-			<Person scale={2.5}/>
+			{#if traits}
+				<Person scale={2.5} traits={traits}/>
+			{/if}
 		</div>
 	</div>
 	<div class="wrapper">
@@ -31,8 +33,14 @@
 	</div>
 	<div class="wrapper">
 		<div class="scanner-container">
-			<TemperatureScanner/>
-			<TemperatureCamera/>
+			{#if !!rules && !!traits}
+				{#if !rules.IR_CAMERA}
+					<TemperatureScanner seed={traits.seed} hot={rules.HIGH_TEMP} temp={traits.temperature}/>
+				{:else}
+					<TemperatureCamera seed={traits.seed} hot={rules.HIGH_TEMP} temp={traits.temperature}/>
+				{/if}
+			{/if}
+			
 		</div>
 	</div>
 	<div class="wrapper">

@@ -18,12 +18,12 @@
 			case HandTypes.PHONE_SAFE_ENTRY_FAKE:
 				screen = phoneSE;
 			break;
-			case HandTypes.PHONE_SAFE_ENTRY:
-			case HandTypes.PHONE_SAFE_ENTRY_FAKE:
+			case HandTypes.PHONE_TRACE_TOGETHER:
+			case HandTypes.PHONE_TRACE_TOGETHER_FAKE:
 				screen = phoneTT;
 			break;
 			case HandTypes.PHONE_OTHER:
-				let x = seed + 2 % 3
+				let x = (seed + 2) % 3
 				switch (x) {
 					case 0: 
 					screen = phoneDino;

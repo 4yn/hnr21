@@ -7,6 +7,7 @@
 
     import Phone from './Phone.svelte'
     import Token from './Token.svelte'
+    import IdentityCard from './IdentityCard.svelte'
 
     export let holding = HandTypes.HAND_NONE;
     export let seed = 0;
@@ -24,6 +25,8 @@
         <img src={Hand3} alt="hand">
         {#if holding === HandTypes.TOKEN_OK || holding === HandTypes.TOKEN_BAD || holding === HandTypes.TOKEN_FAKE}
             <Token seed={seed} ttType={holding}/>
+        {:else if holding === HandTypes.HAND_IC}
+            <IdentityCard seed={seed}/>
         {:else}
             <Phone seed={seed} phoneType={holding}/>
         {/if}
