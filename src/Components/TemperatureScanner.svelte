@@ -144,14 +144,16 @@
 </script>
 
 <main>
+    
 	<div style="position:relative;">
 		<canvas
 		bind:this={canvas}
 		width={200}
 		height={200}
-		style="position:absolute"
+		style="position:absolute;"
 		></canvas>
-	</div>
+    </div>
+
 </main>
 
 <style>
