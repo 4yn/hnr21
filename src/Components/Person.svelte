@@ -19,7 +19,6 @@
 </script>
 
 <main>
-	Person component
 	<div class="person-container">
 		<img src={personSrc} alt="person" style="transform: scale({scale})">
 	</div>

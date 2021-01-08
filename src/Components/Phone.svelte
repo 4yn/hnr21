@@ -1,31 +1,61 @@
 <script>
 	import { HandTypes } from '../Engine/Enums.js';
 
-	export const PhoneModelTypes = {
-		MODEL_IPHONE: 'MODEL_IPHONE',
-		MODEL_IPHONE_LARGE: 'MODEL_IPHONE_LARGE',
-		MODEL_IPHONE_OLD: 'MODEL_IPHONE_OLD',
-		MODEL_SAMSUNG: 'MODEL_SAMSUING',
-		MODEL_XIAOMI: 'MODEL_XIAOMI',
-		MODEL_PIXEL: 'MODEL_PIXEL',
-		MODEL_NOKIA: 'MODEL_NOKIA'
-	}
+	import phoneDino from '../../res/phone/phoneDino.png'
+	import phoneHome from '../../res/phone/phoneHome.png'
+	import phoneNokia from '../../res/phone/phoneNokia.png'
+	import phoneSE from '../../res/phone/phoneSE.png'
+	import phoneTT from '../../res/phone/phoneTT.png'
 
-    export const PhoneOtherTypes = {
-		SCREEN_ERROR: 'SCREEN_ERROR',
-		SCREEN_NO_INTERNET: 'SCREEN_NO_INTERNET',
-		SCREEN_HOME: 'SCREEN_HOME'
-	}
+	export let phoneType = HandTypes.PHONE_SAFE_ENTRY;
+	export let seed = 0;
 
-	export let model = PhoneModelTypes.MODEL_IPHONE;
-	// export let screen = PhoneScreenTypes.SCREEN_SAFE_ENTRY;
-	let screen = '__'
+	let screen;
+
+	$: {
+		switch(phoneType) {
+			case HandTypes.PHONE_SAFE_ENTRY:
+			case HandTypes.PHONE_SAFE_ENTRY_FAKE:
+				screen = phoneSE;
+			break;
+			case HandTypes.PHONE_SAFE_ENTRY:
+			case HandTypes.PHONE_SAFE_ENTRY_FAKE:
+				screen = phoneTT;
+			break;
+			case HandTypes.PHONE_OTHER:
+				let x = seed + 2 % 3
+				switch (x) {
+					case 0: 
+					screen = phoneDino;
+					break;
+					case 1: 
+					screen = phoneNokia;
+					break;
+					case 2:
+					screen = phoneHome;
+					break;
+				}
+			break;
+		}
+	}
 </script>
 
 <main>
-	Phone component
-	Model {model} screen {screen}
+	<div style="position: absolute;">
+		<img src={screen} alt="phoneScreen">
+	</div>
 </main>
 
 <style>
+	main {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+	}
+
+	main img {
+		width: 100px;
+		height: 100px;
+		image-rendering: crisp-edges;
+	}
 </style>
