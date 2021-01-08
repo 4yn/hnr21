@@ -12,26 +12,36 @@
 	export let rules;
 
 	let src = 'background.png';
+	let fgSrc = 'foreground.png';
 </script>
 
 <main>
-	<div>
+	<div class="wrapper">
+		<div class="background">
+			<img class="sharp" {src} alt="booth">
+		</div>
+	</div>
+	<div class="wrapper">
 		Booth component
 		<Token/>
+		<div class="person-container">
+			<Phone/>
+			<Person scale={2.5}/>
+		</div>
+	</div>
+	<div class="wrapper">
+		<div class="foreground">
+			<img class="sharp" src={fgSrc} alt="booth">
+		</div>
+	</div>
+	<div class="wrapper">
 		<div class="scanner-container">
 			<TemperatureScanner/>
 			<TemperatureCamera/>
 		</div>
-		<div class="person-container">
-			<Phone/>
-			<Person scale={3}/>
-		</div>
-		<Notifications gameDay={gameDay} gameRunning={gameRunning}/>
 	</div>
-	<div class="background-wrapper">
-		<div class="background">
-			<img class="sharp" {src} alt="booth">
-		</div>
+	<div class="wrapper">
+		<Notifications gameDay={gameDay} gameStarted={gameStarted}/>
 	</div>
 </main>
 
@@ -42,14 +52,14 @@
 
 	.scanner-container {
 		position: absolute;
-		top: 150px;
-		left: 900px;
+		top: 80px;
+		left: 550px;
 	}
 
 	.person-container {
 		position: absolute;
-		top: 50px;
-		left: 150px;
+		top: 0px;
+		left: 190px;
 	}
 
 	.sharp {
@@ -60,22 +70,33 @@
 		object-fit: cover;
 	}
 
+	.wrapper {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		height: 100%;
+		width: 100%;
+	}
+
 	.background {
 		position: relative;
 		height: 100%;
 		width: 100%;
 	}
 
-	.background-wrapper {
-		z-index: -10;
-		position: absolute;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
+	.background > img {
+		width: 100%;
 	}
 
-	.background > img {
+	.foreground {
+		position: relative;
+		height: 100%;
+		width: 100%;
+	}
+
+	.foreground > img {
 		width: 100%;
 	}
 </style>

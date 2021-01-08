@@ -59,4 +59,8 @@
 </main>
 
 <style>
+	main {
+        position: absolute;
+		padding-left: 50px;
+    }
 </style>
