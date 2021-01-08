@@ -1,29 +1,33 @@
 <script>
+    import { onDestroy } from 'svelte'
+
     import Minimap from '../Components/Minimap.svelte'
     import Booth from '../Components/Booth.svelte'
 
-    const gameTickLength = 10;
+    import GameEngine from '../Engine/GameEngine.js'
 
+    let gameEngineInstance = new GameEngine();
     let started = false;
-    let score = 0;
+    let gameTick = 0;
+    let queueSize = 0;
 
-    export let personInBooth = false;
-    export let numInQueue = 0;
+    let gameLoopInterval = null;
+    onDestroy(() => {
+        if (gameLoopInterval) {
+            clearInterval(intervalToken);
+        }
+    })
 
     function startGame() {
         started = true;
-        setInterval(() => gameLoop, 100);
-    }
-
-    function getSpawnProbability() {
-        //TODO
+        gameLoopInterval = setInterval(() => gameLoop(), 100);
     }
 
     function gameLoop() {
-        if (!personInBooth && numInQueue > 0) {
-            personInBooth = true;
-            numInQueue--;
-        }
+        console.log('tick')
+        gameEngineInstance.doTick();
+        queueSize = gameEngineInstance.queueSize;
+        gameTick = gameEngineInstance.tick;
     }
 </script>
 
@@ -36,6 +40,7 @@
             Start Game
         </button>
     {/if}
+    Tick: {gameTick}, Queue: {queueSize}
 </main>
 
 <style>
