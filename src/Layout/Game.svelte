@@ -14,6 +14,9 @@
     let gameTick = 0;
     let gameDay = 0;
     let queueSize = 0;
+    
+    let traits = null;
+    let rules = [];
 
     let keyPressListener = null;
     let keyPressTimeout = null;
@@ -43,6 +46,8 @@
         queueSize = engine.queueSize;
         gameTick = engine.tick;
         gameDay = engine.day;
+        traits = engine.traits;
+        rules = engine.rules;
     }
 
     function onGameEnd() {
@@ -75,7 +80,7 @@
 
 <main>
     <Minimap class="minimap"/>
-    <Booth class="booth" gameDay={gameDay} gameRunning={gameRunning}/>
+    <Booth class="booth" gameDay={gameDay} gameRunning={gameRunning} traits={traits} rules={rules}/>
     {#if !gameRunning}
         <div class="overlay"/>
         {#if !gameHasStarted}
@@ -92,7 +97,9 @@
             </div>
         {/if}
     {/if}
-    Tick: {gameTick}, Day: {gameDay}, Queue: {queueSize}
+    <div class="debug">
+        Tick: {gameTick}, Day: {gameDay}, Queue: {queueSize}
+    </div>
 </main>
 
 <style>
@@ -142,9 +149,9 @@
 
     .gameOverContainer {
         position: absolute;
-        height: 24em;
-        width: 32em;
-        margin: 2em;
+        height: 16em;
+        width: 24em;
+        padding: 4em;
         top: calc(50% - 12em);
         bottom: calc(50% - 12em);
         left: calc(50% - 16em);
@@ -165,5 +172,17 @@
     .gameOverText {
         font-size: 1.2em;
         font-weight: 20;
+    }
+
+    .debug {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        z-index: 10;
+
+        font-size: 1em;
+        font-weight: 10;
     }
 </style>

@@ -4,6 +4,7 @@
             "Welcome to the job, part-timer.",
             "We've hired you to ensure that no one who enters the mall has caught the Virus.",
             "Check each person's temperature, if it's above 37.5 degrees they're not allowed in.",
+            "Press A to allow entry and D to deny entry."
         ], [
             "WHO announcement: Wear those masks and stop the plague!"
         ], [
@@ -79,10 +80,9 @@
 <style>
     .notification {
         position: absolute;
-        left: 0.5em;
-        bottom: 0.5em;
-        padding: 12px;
-        width: 50%;
+        left: 12px;
+        bottom: 12px;
+        width: calc(50% - 0.5em);
         
         border-radius: 1em 1em 1em 1em;
         border: solid orange;

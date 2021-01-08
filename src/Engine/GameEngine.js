@@ -1,5 +1,6 @@
 import MersenneTwister from 'mersennetwister'
 import Generator from './Generator.js'
+import Rules from './Rules.js';
 
 export default class GameEngine {
     static PROGRESS_NEEDED_PER_DAY = 5;
@@ -19,6 +20,7 @@ export default class GameEngine {
         this.tick = 0;
         this.score = 0;
         this.queueSize = 0;
+        this.rules = Rules.getRulesForDay(this.day);
 
         this.person = null;
         this.traits = this.generator.generateTraits(this.day);
@@ -77,8 +79,9 @@ export default class GameEngine {
         this.score++;
         this.progress++;
         if (this.progress >= GameEngine.PROGRESS_NEEDED_PER_DAY && this.day < 11) {
-            this.progress = 0;
             this.day++;
+            this.progress = 0;
+            this.rules = Rules.getRulesForDay(this.day);
             this.paused = true; // Pause game until player decides
         }
         if (this.progress > GameEngine.PROGRESS_NEEDED_PER_DAY) {

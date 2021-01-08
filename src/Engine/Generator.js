@@ -140,7 +140,7 @@ export default class Generator {
             illegalName = Object.keys(GameEnums.Traits)[this.generateOutcome(Generator.ILLEGAL_TYPE_CHANCES[day])];
         }
 
-        let traits = { allowed: !illegal };
+        let traits = { allowed: !illegal, seed: this.rng.int() };
         Object.keys(GameEnums.Traits).forEach(fieldName => {
             if (fieldName == illegalName) {
                 let index = this.generateOutcome(Generator.ILLEGALS_TABLE[day][fieldName]);
