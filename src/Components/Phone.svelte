@@ -1,5 +1,5 @@
 <script>
-	import HandTypes from '../Engine/Enums.js';
+	import { HandTypes } from '../Engine/Enums.js';
 
 	export const PhoneModelTypes = {
 		MODEL_IPHONE: 'MODEL_IPHONE',
