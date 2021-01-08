@@ -43,7 +43,7 @@
     ];
 
     export let gameDay = 0;
-    export let started = false;
+    export let gameStarted = false;
 
     let notificationMessage;
     let notificationActive = false;
@@ -63,7 +63,7 @@
     };
 
     $: {
-        if (started) {
+        if (gameStarted) {
             displayMessageForDay(gameDay);
         }
     }

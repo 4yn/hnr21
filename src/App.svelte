@@ -34,17 +34,9 @@
 	.container-outer {
 	    position: relative;
 		outline: 0.25rem solid grey;
-		width: min(100vw - 48px, (100vh - 128px - 48px) * 8 / 5);
-		height: min((100vw - 48px) * 5 / 8, 100vh - 8em - 48px);
+		width: 1280px;
+		height: 720px;
 	}
-
-    /*
-	.container-outer:before {
-		display: block;
-		content: "";
-		padding-top: min((100vw - 48px) * 5 / 8, calc(100vh - 8em - 48px));
-	}
-    */
 
 	.container-inner {
 		position: absolute;

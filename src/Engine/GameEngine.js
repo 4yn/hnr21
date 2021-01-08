@@ -21,6 +21,7 @@ export default class GameEngine {
         this.queueSize = 0
 
         this.person = null;
+        this.traits = this.generator.generateTraits(this.day);
     }
 
     doTick() {
@@ -38,7 +39,8 @@ export default class GameEngine {
     }
 
     decide(allowed) {
-        if (allowed === this.person.allowed) {
+        console.log("Decided " + allowed);
+        if (allowed === this.traits.allowed) {
             this.giveScore();
         } else {
             this.givePenalty();
@@ -53,7 +55,7 @@ export default class GameEngine {
 
     popQueue() {
         this.queueSize--;
-        this.traits = this.generator.generateTraits(progress);
+        this.traits = this.generator.generateTraits(this.day);
         if (this.queueSize === 0) {
             this.pushQueue();
         }

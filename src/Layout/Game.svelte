@@ -6,21 +6,33 @@
     import GameEngine from '../Engine/GameEngine.js'
 
     let gameEngineInstance = new GameEngine();
-    let started = false;
+    let gameStarted = false;
+
     let gameTick = 0;
     let gameDay = 0;
     let queueSize = 0;
 
     let gameLoopInterval = null;
+    let keyPressListener = null;
+    let keyPressTimeout = null;
+    let keyPressDisabled = false;
+
     onDestroy(() => {
         if (gameLoopInterval) {
             clearInterval(intervalToken);
         }
+        if (keyPressListener) {
+            document.removeEventListener('keyup', keyPressListener);
+        }
+        if (keyPressTimeout) {
+            clearTimeout(keyPressTimeout);
+        }
     })
 
     function startGame() {
-        started = true;
+        gameStarted = true;
         gameLoopInterval = setInterval(() => gameLoop(), 100);
+        keyPressListener = document.addEventListener('keyup', handleKeyPress);
     }
 
     function gameLoop() {
@@ -30,18 +42,41 @@
         gameTick = gameEngineInstance.tick;
         gameDay = gameEngineInstance.day;
     }
+
+    function handleKeyPress(e) {
+        // Only listen to A, D and Enter
+        if (!["KeyA", "KeyD", "Enter"].includes(e.code) || keyPressDisabled) {
+            return;
+        }
+
+        if (e.code != "Enter") {
+            keyPressDisabled = true;
+            keyPressTimeout = setTimeout(() => {keyPressDisabled = false}, 500);
+        }
+
+        switch (e.code) {
+            case "KeyA":
+                gameEngineInstance.decide(true);
+                break;
+            case "KeyD":
+                gameEngineInstance.decide(false);
+                break;
+            case "Enter":
+                // cancel delay on notification by interrupting promise
+        }
+    }
 </script>
 
 <main>
     <Minimap class="minimap"/>
-    <Booth class="booth" gameDay={gameDay} started={started}/>
-    {#if !started}
+    <Booth class="booth" gameDay={gameDay} gameStarted={gameStarted}/>
+    {#if !gameStarted}
         <div class="overlay"/>
         <button on:click={startGame} class="startButton">
             Start Game
         </button>
     {/if}
-    Tick: {gameTick}, Queue: {queueSize}
+    Tick: {gameTick}, Day: {gameDay}, Queue: {queueSize}
 </main>
 
 <style>
