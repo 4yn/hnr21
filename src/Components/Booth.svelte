@@ -41,7 +41,7 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<Notifications gameDay={gameDay} gameStarted={gameStarted}/>
+		<Notifications gameDay={gameDay} gameRunning={gameRunning}/>
 	</div>
 </main>
 
