@@ -131,7 +131,7 @@ export default class Generator {
     ];
 
     // Returns a JSON object containing fields 'allowed', 'temperature', 'mask' and 'hand'.
-    generatePerson(day) {
+    generateTraits(day) {
         // Generate legal or illegal
         let illegal = (this.rng.rnd() < Generator.ILLEGAL_CHANCE);
 
@@ -139,21 +139,22 @@ export default class Generator {
         if (illegal) {
             illegalName = Object.keys(GameEnums.Traits)[this.generateOutcome(Generator.ILLEGAL_TYPE_CHANCES[day])];
         }
-        
-        let person = { allowed: !illegal };
+
+        let traits = { allowed: !illegal };
         Object.keys(GameEnums.Traits).forEach(fieldName => {
             if (fieldName == illegalName) {
                 let index = this.generateOutcome(Generator.ILLEGALS_TABLE[day][fieldName]);
-                person[fieldName] = Object.values(GameEnums.Traits[fieldName])[index];
+                traits[fieldName] = Object.values(GameEnums.Traits[fieldName])[index];
             } else {
                 let index = this.generateOutcome(Generator.LEGALS_TABLE[day][fieldName]);
-                person[fieldName] = Object.values(GameEnums.Traits[fieldName])[index];
+                traits[fieldName] = Object.values(GameEnums.Traits[fieldName])[index];
             }
         });
 
-        return person;
+        return traits;
     }
 
+    // Generate a random number based on a weighted distribution.
     generateOutcome(rates) {
         let randValue = this.rng.rnd();
         for (var i = 0; i < rates.length; i++) {
