@@ -2,7 +2,9 @@
 	import personFactory from './PersonFactory.js'
 
 	export let seed = 1425;
+	// Heat 1 or more is fever, heat 0.01 is ok, heat null is normal portrait
 	export let selector = {};
+	// export let selector = {heat: 1};
 	export let scale = 2;
 
 	let personSrc = null
