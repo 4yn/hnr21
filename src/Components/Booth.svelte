@@ -4,6 +4,9 @@
 	import TemperatureCamera from './TemperatureCamera.svelte'
 	import Phone from './Phone.svelte'
 	import Person from './Person.svelte'
+	import Notifications from './Notifications.svelte'
+
+	export let gameDay;
 </script>
 
 <main>
@@ -13,6 +16,7 @@
 	<TemperatureCamera/>
 	<Phone/>
 	<Person/>
+	<Notifications day={gameDay}/>
 </main>
 
 <style>

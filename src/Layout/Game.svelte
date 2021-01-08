@@ -9,6 +9,7 @@
     let gameEngineInstance = new GameEngine();
     let started = false;
     let gameTick = 0;
+    let gameDay = 0;
     let queueSize = 0;
 
     let gameLoopInterval = null;
@@ -28,12 +29,13 @@
         gameEngineInstance.doTick();
         queueSize = gameEngineInstance.queueSize;
         gameTick = gameEngineInstance.tick;
+        gameDay = gameEngineInstance.day;
     }
 </script>
 
 <main>
     <Minimap class="minimap"/>
-    <Booth class="booth"/>
+    <Booth class="booth" gameDay={gameDay}/>
     {#if !started}
         <div class="overlay"/>
         <button on:click={startGame} class="startButton">
