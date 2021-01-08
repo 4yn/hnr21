@@ -16,9 +16,9 @@ export default class GameEngine {
         this.progress = 0;
         this.difficulty = 0.025;
 
-        this.tick = 0
-        this.score = 0
-        this.queueSize = 0
+        this.tick = 0;
+        this.score = 0;
+        this.queueSize = 0;
 
         this.person = null;
         this.traits = this.generator.generateTraits(this.day);
