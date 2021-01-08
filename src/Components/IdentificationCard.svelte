@@ -1,17 +1,25 @@
 <script>
+
     export const IdentificationCardType = {
-		CARD_PINK: 'CARD_PINK',
-		CARD_BLUE: 'CARD_BLUE',
-        CARD_GREEN: 'CARD_GREEN',
-        CARD_FAKE: 'CARD_FAKE'
+		IC_PINK: 'IC_PINK',
+		IC_BLUE: 'IC_BLUE',
+        IC_GREEN: 'IC_GREEN',
+        IC_ORANGE: 'IC_ORANGE',
+        IC_PURPLE: 'IC_PURPLE',
+        IC_YELLOW: 'IC_YELLOW',
 	}
 
-	export let type = IdentificationCardType.CARD_PINK;
+    export let scale = 2;
+	export let type = IdentificationCardType.IC_PINK;
+    import cardSrc from '../../res/ic/icPink.png'
 </script>
 
 <main>
     Identification Card component
     Type {type}
+    <div class="card-container" style="transform: scale({scale})">
+		<img src={cardSrc} alt="card">
+	</div>
 </main>
 
 <style>
