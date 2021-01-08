@@ -157,4 +157,8 @@
 </main>
 
 <style>
+    main {
+        position: absolute;
+        padding-top: 50px;
+    }
 </style>

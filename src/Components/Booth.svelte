@@ -7,7 +7,13 @@
 	import Notifications from './Notifications.svelte'
 
 	export let gameDay;
+<<<<<<< HEAD
 	export let gameRunning;
+=======
+	export let gameStarted;
+	export let traits;
+	export let rules;
+>>>>>>> origin
 
 	let src = 'background.png';
 </script>
@@ -16,10 +22,14 @@
 	<div>
 		Booth component
 		<Token/>
-		<TemperatureScanner/>
-		<TemperatureCamera/>
-		<Phone/>
-		<Person/>
+		<div class="scanner-container">
+			<TemperatureScanner/>
+			<TemperatureCamera/>
+		</div>
+		<div class="person-container">
+			<Phone/>
+			<Person scale={3}/>
+		</div>
 		<Notifications gameDay={gameDay} gameRunning={gameRunning}/>
 	</div>
 	<div class="background-wrapper">
@@ -32,6 +42,18 @@
 <style>
 	main {
 		position: relative;
+	}
+
+	.scanner-container {
+		position: absolute;
+		top: 150px;
+		left: 900px;
+	}
+
+	.person-container {
+		position: absolute;
+		top: 50px;
+		left: 150px;
 	}
 
 	.sharp {
