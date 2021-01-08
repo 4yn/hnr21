@@ -30,7 +30,7 @@ export default class GameEngine {
     }
 
     doTick() {     
-        if (this.queueSize > 5) {
+        if (this.queueSize > 30) {
             this.onGameEnd();
             return;
         }
