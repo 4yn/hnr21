@@ -1,5 +1,5 @@
 export const TemperatureTypes = {
-    TEMP_O: 'TEMP_OK',
+    TEMP_OK: 'TEMP_OK',
     TEMP_HIGH: 'TEMP_HIGH'
 }
 

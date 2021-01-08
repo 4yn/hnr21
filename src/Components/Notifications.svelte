@@ -8,8 +8,8 @@
             "WHO announcement: Wear those masks and stop the plague!"
         ], [
             "The government has imposed some new requirements.",
-            "People without masks will not be allowed in.",
-            "Of course, take temperatures as usual."
+            "People without masks should not be allowed entry into malls.",
+            "Of course, take temperatures as per usual."
         ], [
             "NEWS: SafeEntry is now compulsory for all public premises.",
             "People without a SafeEntry pass should present their ICs."
@@ -37,13 +37,13 @@
             "Those TraceTogether tokens are more fragile than initially believed.",
             "Some are showing up with broken or fake ones, so be careful."
         ], [
-            "We've replace our IR camera with a new one.",
+            "We've replaced our IR camera with a new one.",
             "This one displays higher temperatures with a yellow hue."
         ]
     ];
 
-    export let gameDay = 0;
-    export let gameStarted = false;
+    export let gameDay;
+    export let gameRunning;
 
     let notificationMessage;
     let notificationActive = false;
@@ -63,7 +63,8 @@
     };
 
     $: {
-        if (gameStarted) {
+        console.log(gameRunning + " " + gameDay);
+        if (gameRunning) {
             displayMessageForDay(gameDay);
         }
     }
@@ -80,12 +81,13 @@
         position: absolute;
         left: 0.5em;
         bottom: 0.5em;
-        padding: 16px;
+        padding: 12px;
+        width: 50%;
+        
+        border-radius: 1em 1em 1em 1em;
         border: solid orange;
         border-width: 0.25em;
-
-        width: 50%;
-        border-radius: 1em 1em 1em 1em;
+        background-color: white;
 
         opacity: 0.0;
         font-size: 1.4em;

@@ -7,7 +7,7 @@
 	import Notifications from './Notifications.svelte'
 
 	export let gameDay;
-	export let gameStarted;
+	export let gameRunning;
 
 	let src = 'background.png';
 </script>
@@ -20,7 +20,7 @@
 		<TemperatureCamera/>
 		<Phone/>
 		<Person/>
-		<Notifications gameDay={gameDay} gameStarted={gameStarted}/>
+		<Notifications gameDay={gameDay} gameRunning={gameRunning}/>
 	</div>
 	<div class="background-wrapper">
 		<div class="background">

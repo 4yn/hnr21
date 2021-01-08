@@ -1,9 +1,9 @@
 import MersenneTwister from 'mersennetwister'
 import Generator from './Generator.js'
-import Rules from './Generator.js'
 
 export default class GameEngine {
     static PROGRESS_NEEDED_PER_DAY = 5;
+    static TICK_INTERVAL = 100;
 
     constructor(seed = 42) {
         this.rng = new MersenneTwister(seed);
@@ -24,22 +24,33 @@ export default class GameEngine {
         this.traits = this.generator.generateTraits(this.day);
     }
 
-    doTick() {
+    setupCallbacks(onEngineUpdate, onGameEnd) {
+        this.onEngineUpdate = onEngineUpdate;
+        this.onGameEnd = onGameEnd;
+    }
+
+    doTick() {     
+        if (this.queueSize > 5) {
+            this.onGameEnd();
+            return;
+        }
+
+        setTimeout(() => this.doTick(), GameEngine.TICK_INTERVAL);
         if (this.paused) {
             return;
         }
 
-        if (
-            this.queueSize == 0 ||
-            this.rng.rnd() < this.difficulty
-        ) {
+        console.log('tick');
+
+        if (this.queueSize === 0 || this.rng.rnd() < this.difficulty) {
             this.pushQueue();
         }
+
         this.tick++;
+        this.onEngineUpdate(this);
     }
 
     decide(allowed) {
-        console.log("Decided " + allowed);
         if (allowed === this.traits.allowed) {
             this.giveScore();
         } else {
@@ -47,6 +58,7 @@ export default class GameEngine {
         }
         this.popQueue();
         this.paused = false;
+        this.onEngineUpdate(this);
     }
 
     pushQueue() {
@@ -54,11 +66,11 @@ export default class GameEngine {
     }
 
     popQueue() {
-        this.queueSize--;
         this.traits = this.generator.generateTraits(this.day);
         if (this.queueSize === 0) {
             this.pushQueue();
         }
+        this.queueSize--;
     }
 
     giveScore() {

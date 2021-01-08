@@ -4,23 +4,22 @@
     import Minimap from '../Components/Minimap.svelte'
     import Booth from '../Components/Booth.svelte'
     import GameEngine from '../Engine/GameEngine.js'
+    
+    const GAME_OVER_MESSAGE = "You have been fired due to complaints of long lines and wait times. Try harder next time!";
 
     let gameEngineInstance = new GameEngine();
-    let gameStarted = false;
+    let gameHasStarted = false;
+    let gameRunning = false;
 
     let gameTick = 0;
     let gameDay = 0;
     let queueSize = 0;
 
-    let gameLoopInterval = null;
     let keyPressListener = null;
     let keyPressTimeout = null;
     let keyPressDisabled = false;
 
     onDestroy(() => {
-        if (gameLoopInterval) {
-            clearInterval(intervalToken);
-        }
         if (keyPressListener) {
             document.removeEventListener('keyup', keyPressListener);
         }
@@ -30,17 +29,24 @@
     })
 
     function startGame() {
-        gameStarted = true;
-        gameLoopInterval = setInterval(() => gameLoop(), 100);
+        gameHasStarted = true;
+        gameRunning = true;
         keyPressListener = document.addEventListener('keyup', handleKeyPress);
+
+        // Initialize game engine
+        gameEngineInstance.setupCallbacks(onEngineUpdate, onGameEnd);
+        gameEngineInstance.doTick();
     }
 
-    function gameLoop() {
-        console.log('tick')
-        gameEngineInstance.doTick();
-        queueSize = gameEngineInstance.queueSize;
-        gameTick = gameEngineInstance.tick;
-        gameDay = gameEngineInstance.day;
+    // Callback to be passed to game engine, triggered on updates.
+    function onEngineUpdate(engine) {       
+        queueSize = engine.queueSize;
+        gameTick = engine.tick;
+        gameDay = engine.day;
+    }
+
+    function onGameEnd() {
+        gameRunning = false;
     }
 
     function handleKeyPress(e) {
@@ -62,19 +68,29 @@
                 gameEngineInstance.decide(false);
                 break;
             case "Enter":
-                // cancel delay on notification by interrupting promise
+                // TODO: cancel delay on notification by interrupting promise
         }
     }
 </script>
 
 <main>
     <Minimap class="minimap"/>
-    <Booth class="booth" gameDay={gameDay} gameStarted={gameStarted}/>
-    {#if !gameStarted}
+    <Booth class="booth" gameDay={gameDay} gameRunning={gameRunning}/>
+    {#if !gameRunning}
         <div class="overlay"/>
-        <button on:click={startGame} class="startButton">
-            Start Game
-        </button>
+        {#if !gameHasStarted}
+            <button on:click={startGame} class="gameButton centeredButton">
+                Start Game
+            </button>
+        {:else}
+            <div class="overlay"/>
+            <div class="gameOverContainer">
+                <p class="gameOverText">{GAME_OVER_MESSAGE}</p>
+                <button on:click={() => window.location.reload()} class="gameButton">
+                    Restart
+                </button>
+            </div>
+        {/if}
     {/if}
     Tick: {gameTick}, Day: {gameDay}, Queue: {queueSize}
 </main>
@@ -92,6 +108,7 @@
     .minimap {
         grid-area: 1 / 1;
     }
+
     .booth {
         grid-area: 2 / 1;
     }
@@ -106,17 +123,47 @@
         right: 0;
     }
 
-    .startButton {
+    .centeredButton {
         position: absolute;
-        height: 4em;
-        width: 10em;
         top: calc(50% - 2em);
         left: calc(50% - 5em);
+    }
+
+    .gameButton {
+        height: 3em;
+        width: 10em;
 
         color: #ff3e00;
         border-color: #dd1000;
         font-size: 1.5em;
         font-weight: 50;
         z-index: 10;
+    }
+
+    .gameOverContainer {
+        position: absolute;
+        height: 24em;
+        width: 32em;
+        margin: 2em;
+        top: calc(50% - 12em);
+        bottom: calc(50% - 12em);
+        left: calc(50% - 16em);
+        right: calc(50% - 16em);
+        text-align: center;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        background-color: #eeeeee;
+        border-width: 0.25em;
+        border-color: #dd1000;
+        z-index: 5;
+    }
+
+    .gameOverText {
+        font-size: 1.2em;
+        font-weight: 20;
     }
 </style>
