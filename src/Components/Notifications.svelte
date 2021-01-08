@@ -1,5 +1,4 @@
 <script>
-import { select_option } from "svelte/internal";
     const MESSAGES = [
         [
             "Welcome to the job, part-timer.",
