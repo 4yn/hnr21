@@ -34,7 +34,7 @@
 				{#if !rules.IR_CAMERA}
 					<TemperatureScanner seed={traits.seed} hot={rules.HIGH_TEMP} temp={traits.temperature}/>
 				{:else}
-					<TemperatureCamera seed={traits.seed} hot={rules.HIGH_TEMP} temp={traits.temperature}/>
+					<TemperatureCamera seed={traits.seed} traits={traits} hot={rules.HIGH_TEMP} temp={traits.temperature}/>
 				{/if}
 			{/if}
 		</div>
@@ -55,7 +55,7 @@
 	.person-container {
 		position: absolute;
 		top: 45px;
-		left: 190px;
+		left: 310px;
 	}
 
 	.sharp {
