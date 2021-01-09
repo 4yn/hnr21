@@ -37,6 +37,30 @@ function HSVtoRGB(h, s, v) {
     };
 }
 
+function RGBtoHSV(r, g, b) {
+    if (arguments.length === 1) {
+        g = r.g, b = r.b, r = r.r;
+    }
+    var max = Math.max(r, g, b), min = Math.min(r, g, b),
+        d = max - min,
+        h,
+        s = (max === 0 ? 0 : d / max),
+        v = max / 255;
+
+    switch (max) {
+        case min: h = 0; break;
+        case r: h = (g - b) + d * (g < b ? 6: 0); h /= 6 * d; break;
+        case g: h = (b - r) + d * 2; h /= 6 * d; break;
+        case b: h = (r - g) + d * 4; h /= 6 * d; break;
+    }
+
+    return {
+        h: h,
+        s: s,
+        v: v
+    };
+}
+
 const memo = {};
 
 export default function personFactory(seed=null, selector={}) {
@@ -44,8 +68,14 @@ export default function personFactory(seed=null, selector={}) {
     let partIdxs = {}
     let gender = (hash(seed, null) || selector['gender']) % 2;
     let PersonParts = gender ? PersonPartsM : PersonPartsF;
-    let useHeat = selector['heat']
-    partIdxs['heat'] = useHeat
+
+    let useHeat = false;
+    if (selector['heat']) {
+        useHeat = RGBtoHSV(selector['heat']).h
+        console.log("useHeat", useHeat)
+        partIdxs['heat'] = useHeat
+    }
+
     for (let partIdx in partNames) {
         let partName = partNames[partIdx]
         partIdxs[partName] = ((partName in selector) ? selector[partName] : hash(seed + partIdx + 1, 0)) % PersonParts[partName].length;
@@ -147,13 +177,18 @@ export default function personFactory(seed=null, selector={}) {
             canvas2.width = 32
             canvas2.height = 48
             const ctx2 = canvas2.getContext('2d');
-            ctx2.filter = 'blur(3px)';
+            ctx2.filter = 'blur(1px)';
             ctx2.drawImage(canvas, 0, 0);
 
             const finalData = ctx2.getImageData(0, 0, 32, 48)
+
+            let maxH = 0;
             for (let i = 0; i < finalData.data.length; i += 4) {
-                let pxData = HSVtoRGB(0.75 - useHeat * useHeat * useHeat - finalData.data[i] / 120, 1, 1)
-                console.log(pxData)
+                maxH = Math.max(finalData.data[i], maxH);
+            }
+
+            for (let i = 0; i < finalData.data.length; i += 4) {
+                let pxData = HSVtoRGB((1 - finalData.data[i] / maxH) / 3 + useHeat, 1, 1);
                 finalData.data[i] = pxData.r
                 finalData.data[i + 1] = pxData.g
                 finalData.data[i + 2] = pxData.b
