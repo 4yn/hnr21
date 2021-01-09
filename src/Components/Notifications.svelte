@@ -73,7 +73,6 @@
     };
 
     $: {
-        console.log(gameRunning + " " + gameDay);
         if (gameRunning) {
             displayMessageForDay(gameDay);
         }
