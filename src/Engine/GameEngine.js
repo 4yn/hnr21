@@ -4,6 +4,7 @@ import Rules from './Rules.js';
 
 export default class GameEngine {
     static PROGRESS_NEEDED_PER_DAY = 10;
+    static SPEED_PROGRESS_NEEDED_PER_DAY = 5;
     static TICK_INTERVAL = 100;
 
     constructor(soundNotification, seed = 42) {
@@ -16,6 +17,7 @@ export default class GameEngine {
         this.day = 0;
         this.progress = 0;
         this.difficulty = 0.025;
+        this.progressPerDay = GameEngine.PROGRESS_NEEDED_PER_DAY;
 
         this.tick = 0;
         this.score = 0;
@@ -28,6 +30,11 @@ export default class GameEngine {
         this.soundNotification = soundNotification;
         this.soundWrong = new Audio('sounds/wrong.ogg');
         this.soundGameOver = new Audio('sounds/gameover.ogg');
+    }
+
+    setSpeedMode(active) {
+        console.log((active ? "Enabling" : "Disabling") + " speed mode.");
+        this.progressPerDay = active ? GameEngine.SPEED_PROGRESS_NEEDED_PER_DAY : GameEngine.PROGRESS_NEEDED_PER_DAY;
     }
 
     setupCallbacks(onEngineUpdate, onGameEnd, onWarning, onFinish) {
@@ -86,7 +93,7 @@ export default class GameEngine {
     giveScore() {
         this.score++;
         this.progress++;
-        if (this.progress >= GameEngine.PROGRESS_NEEDED_PER_DAY && this.day < 11) {
+        if (this.progress >= this.progressPerDay && this.day < 11) {
             this.day++;
             this.progress = 0;
             this.rules = Rules.getRulesForDay(this.day);
@@ -97,7 +104,7 @@ export default class GameEngine {
                 this.onFinish();
             }
         }
-        if (this.progress > GameEngine.PROGRESS_NEEDED_PER_DAY) {
+        if (this.progress > this.progressPerDay) {
             this.difficulty += 0.002;
         }
     }

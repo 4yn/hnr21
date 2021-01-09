@@ -59,6 +59,11 @@
         gameEngineInstance.doTick();
     }
 
+    function startSpeedGame() {
+        gameEngineInstance.setSpeedMode(true);
+        startGame();
+    }
+
     // Callback to be passed to game engine, triggered on updates.
     function onEngineUpdate(engine) {       
         queueSize = engine.queueSize;
@@ -104,11 +109,17 @@
     {#if !gameRunning}
         <div class="overlay"/>
         {#if !gameHasStarted}
-            <button on:click={startGame} class="gameButton centeredButton">
-                Start Game
-            </button>
+            <div class="wrapperOuter">
+                <div class="wrapperInner">
+                    <button on:click={startGame} class="gameButton">
+                        Start Game
+                    </button>
+                    <button on:click={startSpeedGame} class="gameButton">
+                        Fast Game
+                    </button>
+                </div>
+            </div>
         {:else}
-            <div class="overlay"/>
             <div class="gameOverContainer">
                 <p class="gameOverText">{GAME_OVER_MESSAGE}</p><br>
                 <b class="gameOverText">Score: {finalScore}</b><br>
@@ -210,5 +221,24 @@
 
         font-size: 1.5em;
         font-weight: 10;
+    }
+
+    .wrapperOuter {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    .wrapperInner {
+        position: relative;
+        height: 100%;
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 </style>

@@ -51,7 +51,6 @@
 
 
 		if (prevQ===null || prevQ === queueSize || queueSize < 0){
-			console.log("HI")
 			prevQ = queueSize;
 		} else {
 			console.log(queueSize);
