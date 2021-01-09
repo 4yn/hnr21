@@ -2,10 +2,7 @@
 	import TemperatureScanner from './TemperatureScanner.svelte'
 	import TemperatureCamera from './TemperatureCamera.svelte'
 	import Person from './Person.svelte'
-	import Notifications from './Notifications.svelte'
 
-	export let gameDay;
-	export let gameRunning;
 	export let traits;
 	export let rules;
 
@@ -42,9 +39,6 @@
 			{/if}
 			
 		</div>
-	</div>
-	<div class="wrapper">
-		<Notifications gameDay={gameDay} gameRunning={gameRunning}/>
 	</div>
 </main>
 

@@ -3,7 +3,7 @@ import Generator from './Generator.js'
 import Rules from './Rules.js';
 
 export default class GameEngine {
-    static PROGRESS_NEEDED_PER_DAY = 5;
+    static PROGRESS_NEEDED_PER_DAY = 10;
     static TICK_INTERVAL = 100;
 
     constructor(seed = 42) {
@@ -22,13 +22,14 @@ export default class GameEngine {
         this.queueSize = 0;
         this.rules = Rules.getRulesForDay(this.day);
 
-        this.person = null;
+        this.lastBadTraits = null;
         this.traits = this.generator.generateTraits(this.day);
     }
 
-    setupCallbacks(onEngineUpdate, onGameEnd) {
+    setupCallbacks(onEngineUpdate, onGameEnd, onWarning) {
         this.onEngineUpdate = onEngineUpdate;
         this.onGameEnd = onGameEnd;
+        this.onWarning = onWarning;
     }
 
     doTick() {     
@@ -56,6 +57,7 @@ export default class GameEngine {
         if (allowed === this.traits.allowed) {
             this.giveScore();
         } else {
+            this.onWarning(this.traits.illegalType);
             this.givePenalty();
         }
         this.popQueue();

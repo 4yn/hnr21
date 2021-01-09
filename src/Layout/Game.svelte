@@ -1,9 +1,11 @@
 <script>
     import { onDestroy } from 'svelte'
 
-    import Minimap from '../Components/Minimap.svelte'
-    import Booth from '../Components/Booth.svelte'
-    import GameEngine from '../Engine/GameEngine.js'
+    import Minimap from '../Components/Minimap.svelte';
+    import Booth from '../Components/Booth.svelte';
+    import Notifications from '../Components/Notifications.svelte';
+    import Warnings from '../Components/Warnings.svelte';
+    import GameEngine from '../Engine/GameEngine.js';
     
     const GAME_OVER_MESSAGE = "You have been fired due to complaints of long lines and wait times. Try harder next time!";
 
@@ -14,6 +16,9 @@
     let gameTick = 0;
     let gameDay = 0;
     let queueSize = 0;
+
+    let lastIllegalType = null;
+    let numWarnings = 0;
     
     let traits = null;
     let rules = [];
@@ -37,7 +42,7 @@
         keyPressListener = document.addEventListener('keyup', handleKeyPress);
 
         // Initialize game engine
-        gameEngineInstance.setupCallbacks(onEngineUpdate, onGameEnd);
+        gameEngineInstance.setupCallbacks(onEngineUpdate, onGameEnd, onWarning);
         gameEngineInstance.doTick();
     }
 
@@ -52,6 +57,11 @@
 
     function onGameEnd() {
         gameRunning = false;
+    }
+
+    function onWarning(illegalType) {
+        lastIllegalType = illegalType;
+        numWarnings++;
     }
 
     function handleKeyPress(e) {
@@ -80,7 +90,10 @@
 
 <main>
     <Minimap class="minimap" queueSize={queueSize}/>
-    <Booth class="booth" gameDay={gameDay} gameRunning={gameRunning} traits={traits} rules={rules}/>
+    <Booth class="booth" traits={traits} rules={rules}/>
+    <Notifications gameDay={gameDay} gameRunning={gameRunning}/>
+    <Warnings lastIllegalType={lastIllegalType} numWarnings={numWarnings}/>
+    
     {#if !gameRunning}
         <div class="overlay"/>
         {#if !gameHasStarted}
@@ -110,6 +123,7 @@
         display: grid;
         grid-template-rows: 2fr 3fr;
         grid-template-columns: 1fr;
+        overflow: hidden;
     }
 
     .minimap {
