@@ -26,8 +26,8 @@ export default class GameEngine {
         this.traits = this.generator.generateTraits(this.day);
 
         this.soundNotification = soundNotification;
-        this.soundWrong = new Audio('sounds/wrong.wav');
-        this.soundGameOver = new Audio('sounds/gameover.wav');
+        this.soundWrong = new Audio('sounds/wrong.ogg');
+        this.soundGameOver = new Audio('sounds/gameover.ogg');
     }
 
     setupCallbacks(onEngineUpdate, onGameEnd, onWarning) {
