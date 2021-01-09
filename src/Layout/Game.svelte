@@ -7,7 +7,9 @@
     
     const GAME_OVER_MESSAGE = "You have been fired due to complaints of long lines and wait times. Try harder next time!";
 
-    let gameEngineInstance = new GameEngine();
+    let soundNotification = new Audio('sounds/notification.ogg');
+
+    let gameEngineInstance = new GameEngine(soundNotification);
     let gameHasStarted = false;
     let gameRunning = false;
 
@@ -35,6 +37,8 @@
         gameHasStarted = true;
         gameRunning = true;
         keyPressListener = document.addEventListener('keyup', handleKeyPress);
+        
+        soundNotification.play();
 
         // Initialize game engine
         gameEngineInstance.setupCallbacks(onEngineUpdate, onGameEnd);

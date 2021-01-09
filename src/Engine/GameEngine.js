@@ -6,7 +6,7 @@ export default class GameEngine {
     static PROGRESS_NEEDED_PER_DAY = 5;
     static TICK_INTERVAL = 100;
 
-    constructor(seed = 42) {
+    constructor(soundNotification, seed = 42) {
         this.rng = new MersenneTwister(seed);
         this.generator = new Generator(this.rng);
         
@@ -24,6 +24,10 @@ export default class GameEngine {
 
         this.person = null;
         this.traits = this.generator.generateTraits(this.day);
+
+        this.soundNotification = soundNotification;
+        this.soundWrong = new Audio('sounds/wrong.wav');
+        this.soundGameOver = new Audio('sounds/gameover.wav');
     }
 
     setupCallbacks(onEngineUpdate, onGameEnd) {
@@ -34,6 +38,7 @@ export default class GameEngine {
     doTick() {     
         if (this.queueSize > 30) {
             this.onGameEnd();
+            this.soundGameOver.play();
             return;
         }
 
@@ -83,6 +88,7 @@ export default class GameEngine {
             this.progress = 0;
             this.rules = Rules.getRulesForDay(this.day);
             this.paused = true; // Pause game until player decides
+            this.soundNotification.play();
         }
         if (this.progress > GameEngine.PROGRESS_NEEDED_PER_DAY) {
             this.difficulty += 0.002;
@@ -90,6 +96,7 @@ export default class GameEngine {
     }
 
     givePenalty() {
+        this.soundWrong.play();
         this.pushQueue();
         this.pushQueue();
         this.pushQueue();
