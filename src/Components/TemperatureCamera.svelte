@@ -11,7 +11,7 @@
 	export let seed = 0;
 	export let traits = {}
 	export let hot = false;
-	export let temp = emperatureTypes.TEMP_OK;
+	export let temp = TemperatureTypes.TEMP_OK;
 	// export let hue = CameraHueTypes.CAMERA_GREYSCALE;
 
 	let oldSeed = null;
