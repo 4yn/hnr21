@@ -46,6 +46,8 @@
     export let gameDay;
     export let gameRunning;
 
+    let bannerMessage;
+    let bannerActive = false;
     let notificationMessage;
     let notificationActive = false;
 
@@ -72,20 +74,48 @@
         };
     };
 
+    let showBannerForDay = async (day) => {
+        bannerMessage = 'Day ' + (day + 1).toString();
+        bannerActive = true;
+        await delay(4000);
+        bannerActive = false;
+    }
+
     $: {
         if (gameRunning) {
+            showBannerForDay(gameDay);
             displayMessageForDay(gameDay);
         }
     }
 </script>
 
-<main>
-    <div class="notification" class:active={notificationActive}>
-        <p class="notificationMessage">{notificationMessage}</p>
+<main class="wrapperOuter">    
+    <div class="wrapper">
+        <div class="banner" class:bannerActive={bannerActive}>
+            <p class="bannerMessage">{bannerMessage}</p> 
+        </div>
+        <div class="notification" class:notificationActive={notificationActive}>
+            <p class="notificationMessage">{notificationMessage}</p>
+        </div>
     </div>
 </main>
 
 <style>
+    .wrapperOuter {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+    }
+
+    .wrapper {
+        position: relative;
+        height: 100%;
+        width: 100%;
+    }
+
     .notification {
         position: absolute;
         left: 1.5em;
@@ -106,8 +136,36 @@
     .notificationMessage {
         display: inline-block;
     }
-    
-    .active {
+
+    .notificationActive {
         opacity: 1.0
+    }
+
+    .banner {
+        position: absolute;
+        top: -10em;
+        left: calc(50% - 5.5em);
+        height: 6em;
+        width: 10em;
+        transition: top 0.7s;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        background-color: white;
+        border: solid black;
+        border-width: 0.5em;
+    }
+    
+    .bannerActive {
+        top: 2em;
+    }
+
+    .bannerMessage {
+        display: inline-block;
+        font-size: 3em;
+        font-weight: 100;
     }
 </style>

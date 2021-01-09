@@ -15,6 +15,7 @@
     let gameEngineInstance = new GameEngine(soundNotification);
     let gameHasStarted = false;
     let gameRunning = false;
+    let gameStartTime = null;
 
     let gameTick = 0;
     let gameDay = 0;
@@ -25,6 +26,10 @@
     
     let traits = null;
     let rules = [];
+
+    let finalScore = null;
+    let finishTime = null;
+    let survivalTime = null;
 
     let keyPressListener = null;
     let keyPressTimeout = null;
@@ -42,6 +47,7 @@
     function startGame() {
         gameHasStarted = true;
         gameRunning = true;
+        gameStartTime = Date.now();
         keyPressListener = document.addEventListener('keyup', handleKeyPress);
         
         soundNotification.play();
@@ -49,7 +55,7 @@
         soundBackground.loop = true;
 
         // Initialize game engine
-        gameEngineInstance.setupCallbacks(onEngineUpdate, onGameEnd, onWarning);
+        gameEngineInstance.setupCallbacks(onEngineUpdate, onGameEnd, onWarning, onFinish);
         gameEngineInstance.doTick();
     }
 
@@ -62,7 +68,13 @@
         rules = engine.rules;
     }
 
+    function onFinish() {
+        finishTime = (Date.now() - gameStartTime) / 1000;
+    }
+
     function onGameEnd() {
+        survivalTime = (Date.now() - gameStartTime) / 1000;
+        finalScore = gameEngineInstance.score;
         gameRunning = false;
     }
 
@@ -73,7 +85,7 @@
 
     function handleKeyPress(e) {
         // Only listen to A, D and Enter
-        if (!["KeyA", "KeyD"].includes(e.code) || keyPressDisabled) {
+        if (!gameRunning || !["KeyA", "KeyD"].includes(e.code) || keyPressDisabled) {
             return;
         }
 
@@ -98,7 +110,10 @@
         {:else}
             <div class="overlay"/>
             <div class="gameOverContainer">
-                <p class="gameOverText">{GAME_OVER_MESSAGE}</p>
+                <p class="gameOverText">{GAME_OVER_MESSAGE}</p><br>
+                <b class="gameOverText">Score: {finalScore}</b><br>
+                <b class="gameOverText">Finish time: {finishTime ? finishTime.toFixed(2) + 's' : '-'}</b><br>
+                <b class="gameOverText">Survival time: {survivalTime.toFixed(2)}s</b><br>
                 <button on:click={() => window.location.reload()} class="gameButton">
                     Restart
                 </button>

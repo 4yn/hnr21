@@ -5,10 +5,10 @@
         'MASK_FUNNY': 'Was that a mask?',
         'HAND_NONE': 'No pass shown',
         'HAND_IC': 'IC not acceptable',
-        'PHONE_SAFEENTRY': 'SafeEntry not acceptable',
-        'PHONE_SAFEENTRY_FAKE': 'Fake SafeEntry',
-        'PHONE_TRACETOGETHER_FAKE': 'Fake TraceTogether',
-        'PHONE_OTHER': 'Were you paying attention?',
+        'SCREEN_SAFE_ENTRY': 'SafeEntry not acceptable',
+        'SCREEN_SAFE_ENTRY_FAKE': 'Fake SafeEntry',
+        'SCREEN_TRACE_TOGETHER_FAKE': 'Fake TraceTogether',
+        'SCREEN_OTHER': 'Were you paying attention?',
         'TOKEN_FAKE': 'Not a token',
         'TOKEN_BAD': 'Damaged token'
     };

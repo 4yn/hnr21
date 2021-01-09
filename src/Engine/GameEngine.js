@@ -30,10 +30,11 @@ export default class GameEngine {
         this.soundGameOver = new Audio('sounds/gameover.ogg');
     }
 
-    setupCallbacks(onEngineUpdate, onGameEnd, onWarning) {
+    setupCallbacks(onEngineUpdate, onGameEnd, onWarning, onFinish) {
         this.onEngineUpdate = onEngineUpdate;
         this.onGameEnd = onGameEnd;
         this.onWarning = onWarning;
+        this.onFinish = onFinish;
     }
 
     doTick() {     
@@ -91,6 +92,10 @@ export default class GameEngine {
             this.rules = Rules.getRulesForDay(this.day);
             this.paused = true; // Pause game until player decides
             this.soundNotification.play();
+
+            if (this.day === 11) {
+                this.onFinish();
+            }
         }
         if (this.progress > GameEngine.PROGRESS_NEEDED_PER_DAY) {
             this.difficulty += 0.002;

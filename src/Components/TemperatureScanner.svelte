@@ -5,7 +5,7 @@
     export let temp = TemperatureTypes.TEMP_OK;
     export let hot = false;
     import { onMount } from 'svelte';
-    let temperature = 37.5;
+    let temperature = 37.4;
     let oldSeed = null;
 
 	//must edit this source later
@@ -148,7 +148,7 @@
     });
     
     $: {
-        if (seed !== oldSeed && oldSeed !== null) {
+        if (seed !== oldSeed && oldSeed !== null && canvas) {
             if (temp === TemperatureTypes.TEMP_OK) {
                 temperature = 37.4 - ((seed * seed * seed) % 15) / 10.0
             } else {
@@ -159,6 +159,7 @@
                 temperature = temperature + 0.4;
             }
 
+            console.log(temperature)
             updateImage();
         }
         oldSeed = seed
