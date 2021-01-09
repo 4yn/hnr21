@@ -152,7 +152,7 @@ export default function personFactory(seed=null, selector={}) {
 
             const finalData = ctx2.getImageData(0, 0, 32, 48)
             for (let i = 0; i < finalData.data.length; i += 4) {
-                let pxData = HSVtoRGB(0.65 - useHeat / 10.0 - finalData.data[i] / 120, 1, 1)
+                let pxData = HSVtoRGB(0.75 - useHeat * useHeat * useHeat - finalData.data[i] / 120, 1, 1)
                 console.log(pxData)
                 finalData.data[i] = pxData.r
                 finalData.data[i + 1] = pxData.g

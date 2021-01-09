@@ -16,13 +16,13 @@ export default class Rules {
     ]
 
     static getRulesForDay(day) {
-        let rulesArray = [];
+        let rulesData = {};
         Rules.RULE_LIST.forEach(rule => {
             if (rule.start <= day && day <= rule.end) {
-                rulesArray.push(rule.name);
+                rulesData[rule.name] = true
             }
         });
         
-        return rulesArray;
+        return rulesData;
     }
 }
