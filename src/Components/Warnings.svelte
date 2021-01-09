@@ -9,7 +9,7 @@
         'PHONE_SAFEENTRY_FAKE': 'Fake SafeEntry',
         'PHONE_TRACETOGETHER_FAKE': 'Fake TraceTogether',
         'PHONE_OTHER': 'Were you paying attention?',
-        'TOKEN_FAKE': 'Fake token',
+        'TOKEN_FAKE': 'Not a token',
         'TOKEN_BAD': 'Damaged token'
     };
 

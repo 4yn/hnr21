@@ -50,7 +50,16 @@
     let notificationActive = false;
 
     let delay = millis => new Promise((resolve, reject) => {
-        setTimeout(_ => resolve(), millis)
+        var enterKeyListener = document.addEventListener('keyup', (e) => {
+            if (e.code === 'Enter' && notificationActive) {
+                resolve();
+            }
+        });
+
+        setTimeout(_ => {
+            document.removeEventListener('keyup', enterKeyListener);
+            resolve();
+        }, millis);
     });
 
     let displayMessageForDay = async (day) => {

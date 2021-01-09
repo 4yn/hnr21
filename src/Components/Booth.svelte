@@ -37,7 +37,6 @@
 					<TemperatureCamera seed={traits.seed} hot={rules.HIGH_TEMP} temp={traits.temperature}/>
 				{/if}
 			{/if}
-			
 		</div>
 	</div>
 </main>

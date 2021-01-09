@@ -70,25 +70,13 @@
 
     function handleKeyPress(e) {
         // Only listen to A, D and Enter
-        if (!["KeyA", "KeyD", "Enter"].includes(e.code) || keyPressDisabled) {
+        if (!["KeyA", "KeyD"].includes(e.code) || keyPressDisabled) {
             return;
         }
 
-        if (e.code != "Enter") {
-            keyPressDisabled = true;
-            keyPressTimeout = setTimeout(() => {keyPressDisabled = false}, 500);
-        }
-
-        switch (e.code) {
-            case "KeyA":
-                gameEngineInstance.decide(true);
-                break;
-            case "KeyD":
-                gameEngineInstance.decide(false);
-                break;
-            case "Enter":
-                // TODO: cancel delay on notification by interrupting promise
-        }
+        keyPressDisabled = true;
+        keyPressTimeout = setTimeout(() => {keyPressDisabled = false}, 500);
+        gameEngineInstance.decide(e.code === "KeyA");
     }
 </script>
 
