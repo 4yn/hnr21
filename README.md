@@ -8,6 +8,8 @@ You play the role of a security guard in charge of the entrance to a mall. In or
 
 ![Game window](https://cdn.discordapp.com/attachments/796226828452364308/797293622953246720/5.png)
 
+_SafeEntry: A unique Singapore story. As an ambassador, ALLOW or DENY entry. Take a trip down the memory lane from Phase I to Phase III and scan 11Bs, Pink ICs along the way. Can you balance checking SafeEntry, counterfeit TraceTogether tokens, ICs, masks and thermal temperature, under the pressure of long sNaKiNg queues?_
+
 ## How We built it
 
 Game mechanics and rendering were all done using Svelte & HTML5 canvas. Pixel art assets were curated using Piskel & GIMP.
@@ -18,9 +20,7 @@ Since you will see so many people in one game, getting enough art assets to make
 
 ![Generated Characters](https://cdn.discordapp.com/attachments/796226828452364308/797293634428862504/4.png)
 
-_SafeEntry: A unique Singapore story. As an ambassador, ALLOW or DENY entry. Take a trip down the memory lane from Phase I to Phase III and scan 11Bs, Pink ICs along the way._
-
-_Can you balance checking SafeEntry, counterfeit TraceTogether tokens, ICs, masks and thermal temperature, under the pressure of long sNaKiNg queues?_
+_By the way, all our pixel characters are randomly generated from a collection of hairs, faces, eyes, noses, mouths, bodies. You’ll never meet the same person twice!_
 
 ## Accomplishments that We're proud of
 
