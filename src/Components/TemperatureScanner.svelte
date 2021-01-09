@@ -5,7 +5,7 @@
     export let temp = TemperatureTypes.TEMP_OK;
     export let hot = false;
     import { onMount } from 'svelte';
-    let temperature = 37.4;
+    let temperature = 37.5;
     let oldSeed = null;
 
 	//must edit this source later
