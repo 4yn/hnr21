@@ -140,11 +140,12 @@ export default class Generator {
             illegalName = Object.keys(GameEnums.Traits)[this.generateOutcome(Generator.ILLEGAL_TYPE_CHANCES[day])];
         }
 
-        let traits = { allowed: !illegal, seed: this.rng.int() };
+        let traits = { allowed: !illegal, illegalType: null, seed: this.rng.int() };
         Object.keys(GameEnums.Traits).forEach(fieldName => {
             if (fieldName == illegalName) {
                 let index = this.generateOutcome(Generator.ILLEGALS_TABLE[day][fieldName]);
                 traits[fieldName] = Object.values(GameEnums.Traits[fieldName])[index];
+                traits.illegalType = traits[fieldName];
             } else {
                 let index = this.generateOutcome(Generator.LEGALS_TABLE[day][fieldName]);
                 traits[fieldName] = Object.values(GameEnums.Traits[fieldName])[index];

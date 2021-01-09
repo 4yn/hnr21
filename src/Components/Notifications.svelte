@@ -57,9 +57,9 @@
         for (var i = 0; i < MESSAGES[day].length; i++) {
             notificationMessage = MESSAGES[day][i];
             notificationActive = true;
-            await delay(3000);
+            await delay(2500);
             notificationActive = false;
-            await delay(500);
+            await delay(400);
         };
     };
 
@@ -80,9 +80,9 @@
 <style>
     .notification {
         position: absolute;
-        left: 12px;
-        bottom: 12px;
-        width: calc(50% - 0.5em);
+        left: 1.5em;
+        bottom: 1.5em;
+        width: calc(40% - 1.5em);
         
         border-radius: 1em 1em 1em 1em;
         border: solid orange;
