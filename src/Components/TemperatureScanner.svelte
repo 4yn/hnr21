@@ -104,7 +104,7 @@
 			context.mozImageSmoothingEnabled = false;
 			context.imageSmoothingEnabled = false;
 			context.drawImage(base_image, 0, 0, 200, 200);
-			draw(temperature.toString().slice(0, 4), 4);
+			draw(temperature.toFixed(1), 4);
 		};
 
 		base_image.src = src;
