@@ -35,8 +35,7 @@
 			context.fill();
 
 			if (innerImage) {
-				console.log(innerImage)
-				context.drawImage(innerImage, 0, 0, 32, 32, 30, 20, 210, 180);
+				context.drawImage(innerImage, 0, 0, 32, 32, 10, 20, 230, 180);
 			}
 
 			context.webkitImageSmoothingEnabled = false;
@@ -58,6 +57,19 @@
 			context.fill();
 		}
 	};
+
+	function getMaxColor () {
+		let offsetx = (temperature - 37.5)*30
+		let imageData = canvas.getContext('2d').getImageData(offsetx + 150, 170, 1, 1).data
+		if (imageData[0] === 0 && imageData[1] === 0 && imageData[2] === 0) {
+			imageData = [0, 255, 0]
+		}
+		return {
+			r: imageData[0],
+			g: imageData[1],
+			b: imageData[2]
+		}
+	}
 
 	onMount(() => {
 		updateImage();
@@ -81,14 +93,16 @@
             if (temp === TemperatureTypes.TEMP_OK) {
                 temperature = 37.4 - ((seed * seed * seed) % 15) / 10.0
             } else {
-                temperature = 37.5 + ((seed * seed * seed) % 10) / 10.0
+                temperature = 37.8 + ((seed * seed * seed) % 10) / 10.0
             }
 
             if (hot) {
                 temperature = temperature + 0.4;
 			}
-			
-			personFactory(traits.seed, {...maskSelector, heat: (temperature - 34) / 10}).then((res) => {
+
+			updateImage();
+			console.log("maxcolor" ,getMaxColor());
+			personFactory(traits.seed, {...maskSelector, heat: getMaxColor()}).then((res) => {
 				let img = new Image()
 				img.src = res;
 				return new Promise((resolve) => {
@@ -99,10 +113,6 @@
 			}).then((res) => {
 				updateImage(res)
 			})
-
-            updateImage();
-		}
-		if (canvas) {
 			oldSeed = seed
 		}
     }
