@@ -120,9 +120,11 @@
             </div>
         {/if}
     {/if}
-    <div class="debug">
-        Tick: {gameTick}, Day: {gameDay}, Queue: {queueSize}
-    </div>
+    <!--
+        <div class="debug">
+            Tick: {gameTick}, Day: {gameDay}, Queue: {queueSize}
+        </div>
+    -->
 </main>
 
 <style>

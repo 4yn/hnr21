@@ -159,7 +159,6 @@
                 temperature = temperature + 0.4;
             }
 
-            console.log(temperature)
             updateImage();
         }
         oldSeed = seed
