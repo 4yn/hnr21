@@ -1,105 +1,41 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+## Inspiration
 
----
+[Papers Please](https://store.steampowered.com/app/239030/Papers_Please/) and SafeEntry measures which seemed to change every other week over the past year.
 
-# svelte app
+## What it does
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+You play the role of a security guard in charge of the entrance to a mall. In order keep patrons safe from members of the public who may be ill and also to comply with current contact tracing regulations, you will need to decide if you can let someone into the mall or instead send them away. However, you'll always need to be on your toes as the rules keep changing! From masks becoming compulsory to temperature taking equipment changing, from changing modes of registration to people trying to sneak past without properly checking in. Make too many mistakes or take too long and the queue might grow so long that you get fired!
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+![Game window](https://cdn.discordapp.com/attachments/796226828452364308/797293622953246720/5.png)
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
+## How We built it
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+Game mechanics and rendering were all done using Svelte & HTML5 canvas. Pixel art assets were curated using Piskel & GIMP.
 
+## Challenges We ran into
 
-## Get started
+Since you will see so many people in one game, getting enough art assets to make the characters feel less repetitive was tough. The inspiration game Paper's Please had a [interesting approach to procedural generation](https://forums.tigsource.com/index.php?topic=29750.msg820306#msg820306) that made every character unique, but obviously we didn't have enough time for that. Instead, we took advantage of new technologies like [This Person Does Not Exist](https://thispersondoesnotexist.com/) and [Pixel me](https://pixel-me.tokyo/en/) to generate base art that we would then manually split into facial components, which are later used for random generation of faces!
 
-Install the dependencies...
+![Generated Characters](https://cdn.discordapp.com/attachments/796226828452364308/797293634428862504/4.png)
 
-```bash
-cd svelte-app
-npm install
-```
+_SafeEntry: A unique Singapore story. As an ambassador, ALLOW or DENY entry. Take a trip down the memory lane from Phase I to Phase III and scan 11Bs, Pink ICs along the way._
 
-...then start [Rollup](https://rollupjs.org):
+_Can you balance checking SafeEntry, counterfeit TraceTogether tokens, ICs, masks and thermal temperature, under the pressure of long sNaKiNg queues?_
 
-```bash
-npm run dev
-```
+## Accomplishments that We're proud of
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+Getting our minimum-viable-prototype done at 5AM.
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+Everyone in our team learning some amount of pixel art skills, recreating iconic objects like the Chrome dinosaur and the Nokia 3310.
 
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
+Coordinating a **pretty** big hackathon project in a short time - over 1800 LOC in 18 or so hours (we started late ;_;).
 
-## Building and running in production mode
+## What We learned
 
-To create an optimised version of the app:
+Game design, asset management and procedural generation is hard. 
+-
+## What's next for SafeEntry Please
 
-```bash
-npm run build
-```
+Local multiplayer mode? Imagine a bishi-bashi style game where multiple people fight to see who is the better security guard!
 
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
-```
-
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+Infinite mode with more wacky rules.
