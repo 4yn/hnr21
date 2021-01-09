@@ -42,6 +42,8 @@ export default class GameEngine {
         this.onGameEnd = onGameEnd;
         this.onWarning = onWarning;
         this.onFinish = onFinish;
+
+        onEngineUpdate(this)
     }
 
     doTick() {     
