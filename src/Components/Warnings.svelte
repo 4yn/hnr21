@@ -7,7 +7,7 @@
         'HAND_IC': 'IC not acceptable',
         'SCREEN_SAFE_ENTRY': 'SafeEntry not acceptable',
         'SCREEN_SAFE_ENTRY_FAKE': 'Fake SafeEntry',
-        'SCREEN_TRACE_TOGETHER_FAKE': 'Fake TraceTogether',
+        'SCREEN_TRACE_TOGETHER_FAKE': 'Fake SafeEntry',
         'SCREEN_OTHER': 'Were you paying attention?',
         'TOKEN_FAKE': 'Not a token',
         'TOKEN_BAD': 'Damaged token'

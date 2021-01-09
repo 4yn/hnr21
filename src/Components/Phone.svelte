@@ -5,6 +5,7 @@
 	import phoneHome from '../../res/phone/phoneHome.png'
 	import phoneNokia from '../../res/phone/phoneNokia.png'
 	import phoneSE from '../../res/phone/phoneSE.png'
+	import phoneUnsafe from '../../res/phone/phoneUnsafe.png'
 	import phoneTT from '../../res/phone/phoneTT.png'
 
 	export let phoneType = HandTypes.PHONE_SAFE_ENTRY;
@@ -14,12 +15,14 @@
 
 	$: {
 		switch(phoneType) {
-			case HandTypes.PHONE_SAFE_ENTRY:
-			case HandTypes.PHONE_SAFE_ENTRY_FAKE:
+			case HandTypes.PHONE_SAFE_ENTRY:	
 				screen = phoneSE;
 			break;
-			case HandTypes.PHONE_TRACE_TOGETHER:
+			case HandTypes.PHONE_SAFE_ENTRY_FAKE:
 			case HandTypes.PHONE_TRACE_TOGETHER_FAKE:
+				screen = phoneUnsafe;
+			break;
+			case HandTypes.PHONE_TRACE_TOGETHER:
 				screen = phoneTT;
 			break;
 			case HandTypes.PHONE_OTHER:

@@ -93,14 +93,14 @@ export default class GameEngine {
     giveScore() {
         this.score++;
         this.progress++;
-        if (this.progress >= this.progressPerDay && this.day < 11) {
+        if (this.progress >= this.progressPerDay && this.day < 10) {
             this.day++;
             this.progress = 0;
             this.rules = Rules.getRulesForDay(this.day);
             this.paused = true; // Pause game until player decides
             this.soundNotification.play();
 
-            if (this.day === 11) {
+            if (this.day === 10) {
                 this.onFinish();
             }
         }
