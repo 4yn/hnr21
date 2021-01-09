@@ -1,4 +1,5 @@
 import Body1M from '../../res/body/body_1_m.png'
+import Body2M from '../../res/body/body_2_m.png'
 import Face3M from '../../res/face/face_3_m.png'
 import Face13M from '../../res/face/face_13_m.png'
 import Face2M from '../../res/face/face_2_m.png'
@@ -23,7 +24,7 @@ import Hair3M from '../../res/hair/hair_3_m.png'
 import Hair13M from '../../res/hair/hair_13_m.png'
 import Hair2M from '../../res/hair/hair_2_m.png'
 export const PersonPartsM = {
-	body: [Body1M],
+	body: [Body1M, Body2M],
 	face: [Face3M, Face13M, Face2M],
 	eyes: [Eye3M, Eye13M, Eye2M],
 	nose: [Nose3M, Nose2M, Nose13M],
@@ -32,6 +33,9 @@ export const PersonPartsM = {
 	hair: [Hair3M, Hair13M, Hair2M],
 }
 import Body1F from '../../res/body/body_1_f.png'
+import Body2F from '../../res/body/body_2_f.png'
+import Body3F from '../../res/body/body_3_f.png'
+import Body4F from '../../res/body/body_4_f.png'
 import Face6F from '../../res/face/face_6_f.png'
 import Face27F from '../../res/face/face_27_f.png'
 import Face1F from '../../res/face/face_1_f.png'
@@ -56,7 +60,7 @@ import Hair6F from '../../res/hair/hair_6_f.png'
 import Hair27F from '../../res/hair/hair_27_f.png'
 import Hair1F from '../../res/hair/hair_1_f.png'
 export const PersonPartsF = {
-	body: [Body1F],
+	body: [Body1F, Body2F, Body3F, Body4F],
 	face: [Face6F, Face27F, Face1F],
 	eyes: [Eye1F, Eye6F, Eye27F],
 	nose: [Nose27F, Nose6F, Nose1F],
