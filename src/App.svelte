@@ -4,7 +4,8 @@
 </script>
 
 <main>
-    <h1>SafeEntry Please</h1>
+	<h1>SafeEntry Please</h1>
+	<a href="https://devpost.com/software/safeentry-please-41r5ah" class="devpost-link">Devpost!</a>
 	<div class="container-outer">
         <div class="container-inner">
             <Game></Game>
@@ -57,6 +58,18 @@
         color: #ff3e00;
         text-transform: uppercase;
         font-size: 4em;
+        font-weight: 100;
+        margin: 0;
+	}
+	
+	a.devpost-link {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+        height: 1em;
+        color: #ff3e00;
+        text-transform: uppercase;
+        font-size: 2em;
         font-weight: 100;
         margin: 0;
     }
