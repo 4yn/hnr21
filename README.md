@@ -1,3 +1,5 @@
+![Icon](icon.png)
+
 ## Inspiration
 
 [Papers Please](https://store.steampowered.com/app/239030/Papers_Please/) and SafeEntry measures which seemed to change every other week over the past year.
@@ -33,7 +35,8 @@ Coordinating a **pretty** big hackathon project in a short time - over 1800 LOC 
 ## What We learned
 
 Game design, asset management and procedural generation is hard. 
--
+
+
 ## What's next for SafeEntry Please
 
 Local multiplayer mode? Imagine a bishi-bashi style game where multiple people fight to see who is the better security guard!
