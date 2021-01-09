@@ -4,90 +4,100 @@
 	export let queueSize;
 	var prevQ = null;
 
+	function vibrate(dx){
+		return dx + Math.floor(Math.random()*21 - 10);
+	}
+
 	//coordinates of the people
 	var arr = [
-		[90, 80],
-		[110, 80],
-		[130, 80],
-		[150, 80],
-		[170, 80],
-		[190, 80],
-		[210, 80],
-		[230, 80],
-		[250, 80],
-		[270, 80],
-		[270, 40],
-		[270, 0],
-		[250, 0],
-		[230, 0],
-		[210, 0],
-		[190, 0],
-		[170, 0],
-		[150, 0],
-		[130, 0],
-		[110, 0],
-		[90, 0],
-		[70, 0],
-		[50, 0],
-		[30, 0],
-		[10, 0],
+		[390, 350],
+		[390, 175],
+		[460, 175],
+		[530, 175],
+		[600, 175],
+		[670, 175],
+		[740, 175],
+		[810, 175],
+		[880, 175],
+		[950, 175],
+		[1020, 175],
+		[1090, 175],
+		[1160, 175],
+		[1160, 90],
+		[1160, 10],
+		[1090, 10],
+		[1020, 10],
+		[950, 10],
+		[880, 10],
+		[810, 10],
+		[740, 10],
+		[670, 10],
+		[600, 10],
+		[530, 10],
+		[460, 10],
+		[390, 10],
+		[320, 10],
+		[250, 10],
+		[180, 10],
+		[110, 10],
+		[40, 10],
 	];
 
 	let src = 'tempminigame3.png';
 	let src2 = 'people2.png';
-	let canvas;
-
-	onMount(() => {
-
-		const context = canvas.getContext('2d');
-
-		var base_image = new Image();
-		base_image.onload = function () {
-			context.webkitImageSmoothingEnabled = false;
-			context.mozImageSmoothingEnabled = false;
-			context.imageSmoothingEnabled = false;
-			context.drawImage(base_image, 0, 0, context.canvas.width, context.canvas.height);
-		};
-
-		base_image.src = src;
-
-	});
-
-	function animate() {
-		const context = canvas.getContext('2d');
-
-		context.clearRect(0, 0, canvas.width, canvas.height);  // clear canvas
-
-		var base_image = new Image();
-		base_image.onload = function () {
-			context.webkitImageSmoothingEnabled = false;
-			context.mozImageSmoothingEnabled = false;
-			context.imageSmoothingEnabled = false;
-			context.drawImage(base_image, 0, 0, context.canvas.width, context.canvas.height);
-		};
-
-		base_image.src = src;
-
-		for (let i = 0; i < Math.min(25, queueSize); i++){
-			let person2 = new Image();
-			person2.onload = function () {
-				context.webkitImageSmoothingEnabled = false;
-				context.mozImageSmoothingEnabled = false;
-				context.imageSmoothingEnabled = false;
-				context.drawImage(person2, arr[i][0], arr[i][1], 16, 46);
-			};
-			person2.src = src2;
-		}
-	}
+	const carr = [];
 
     $: {
 
 
 		if (prevQ===null || prevQ === queueSize || queueSize < 0){
+			console.log("HI")
 			prevQ = queueSize;
 		} else {
 			console.log(queueSize);
+			if (prevQ < queueSize){
+				for (let i = carr.length; i < Math.min(30, queueSize); i++){
+					let person2 = new Image();
+					person2.src = src2;
+					person2.style.left = arr[i][0].toString() + "px";
+					person2.style.top = arr[i][1].toString() + "px";
+					person2.style.textAlign="initial";
+					person2.style.position = "absolute";
+					person2.style.zIndex = "10"
+					person2.style.width = "36px";
+					person2.style.height = "48px";
+					person2.style.transition = "left 1s, top 1s";
+					document.getElementById('gg').appendChild(person2); 
+					carr.push([person2, arr[i][0], arr[i][1]]);
+				}
+			} else {
+				for (let i = queueSize; i < prevQ; i++){
+					carr.shift();
+					var list = document.getElementById('gg');
+					list.removeChild(list.childNodes[1]); 
+				}
+			}
+			prevQ = queueSize;
 			animate();
+		}
+
+		function animate() {
+			for (var i = 0; i < Math.min(30, carr.length); i++){
+				if ((carr[i][1]-arr[i][0])*(carr[i][1]-arr[i][0]) + (carr[i][2]-arr[i][1])*(carr[i][2]-arr[i][1]) > 100){
+					console.log("FALSE")
+					console.log()
+					carr[i][0].style.left = (vibrate(arr[i][0])).toString() + "px";
+					carr[i][0].style.top = (vibrate(arr[i][1])).toString() + "px";
+					carr[i][1] = arr[i][0];
+					carr[i][2] = arr[i][1];
+				} else {
+					carr[i][1] = arr[i][0];
+					carr[i][2] = arr[i][1];
+					carr[i][0].style.left = (vibrate(arr[i][0])).toString() + "px";
+					carr[i][0].style.top = (vibrate(arr[i][1])).toString() + "px";
+				}
+			}
+
 		}
     }
 
@@ -97,13 +107,11 @@
 	<!--<div>
 		Minimap component
 	</div>-->
-	<div class="background-wrapper">
+	<div class="background-wrapper" id="gg">
 		<div class="background">
-			<!--<img class="sharp" {src} alt="booth">-->
-			<canvas
-			bind:this={canvas}
-			class="sharp"
-			></canvas>
+			<div>
+				<img class="sharp" {src} alt="booth">
+			</div>
 		</div>
 	</div>
 </main>
@@ -135,6 +143,10 @@
 		left: 0;
 		bottom: 0;
 		right: 0;
+	}
+
+	#gg {
+		text-align: initial;
 	}
 
 	.background > img {
