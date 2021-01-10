@@ -42,3 +42,15 @@ Game design, asset management and procedural generation is hard.
 Local multiplayer mode? Imagine a bishi-bashi style game where multiple people fight to see who is the better security guard!
 
 Infinite mode with more wacky rules.
+
+## Attribution
+
+Royalty-free audio was sourced from [freesound.org](freesound.org)
+
+BGM: 
+- [retro last level video game loop by emceeiscokid](https://freesound.org/people/emceeciscokid/sounds/434856/) [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/)
+
+SFX:
+- [Notification (Synth) by AndreWharn](https://freesound.org/people/AndreWharn/sounds/501212/) [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/)
+- [Wrong Buzzer by KevinVG207](https://freesound.org/people/KevinVG207/sounds/331912/) [(CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/)
+- [negative_beeps.wav by themusicalnomad](https://freesound.org/people/themusicalnomad/sounds/253886/) [(CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/)
